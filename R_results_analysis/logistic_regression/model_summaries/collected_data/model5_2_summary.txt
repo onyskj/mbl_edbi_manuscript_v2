@@ -1,0 +1,44 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) [
+glmerMod]
+ Family: binomial  ( logit )
+Formula: stay ~ r * transition * (age_z) + (r * transition + 1 | sub)
+   Data: data_all_shifted_recoded
+Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e+05))
+
+     AIC      BIC   logLik deviance df.resid 
+ 18017.2  18161.0  -8990.6  17981.2    21744 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-7.0852  0.1767  0.2979  0.4791  4.4386 
+
+Random effects:
+ Groups Name         Variance Std.Dev. Corr             
+ sub    (Intercept)  0.98324  0.9916                    
+        r            0.24708  0.4971    0.03            
+        transition   0.02909  0.1705   -0.42 -0.38      
+        r:transition 0.13198  0.3633    0.17 -0.45  0.77
+Number of obs: 21762, groups:  sub, 73
+
+Fixed effects:
+                    Estimate Std. Error z value Pr(>|z|)    
+(Intercept)         1.748097   0.118945  14.697  < 2e-16 ***
+r                   0.509182   0.063778   7.984 1.42e-15 ***
+transition         -0.043494   0.032161  -1.352  0.17625    
+age_z               0.179429   0.119002   1.508  0.13161    
+r:transition        0.145844   0.049657   2.937  0.00331 ** 
+r:age_z            -0.043694   0.063670  -0.686  0.49255    
+transition:age_z   -0.018432   0.031393  -0.587  0.55712    
+r:transition:age_z  0.009865   0.049232   0.200  0.84118    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) r      trnstn age_z  r:trns r:ag_z trns:_
+r            0.049                                          
+transition  -0.331 -0.245                                   
+age_z        0.010  0.000 -0.015                            
+r:transitin  0.136 -0.443  0.524  0.002                     
+r:age_z      0.000  0.031  0.000  0.041 -0.019              
+transtn:g_z -0.014  0.000  0.088 -0.329  0.014 -0.236       
+r:trnstn:g_  0.001 -0.019  0.013  0.147  0.044 -0.432  0.526

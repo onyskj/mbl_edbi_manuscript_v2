@@ -1,0 +1,65 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) [
+glmerMod]
+ Family: binomial  ( logit )
+Formula: stay ~ r * transition * (condition + age_z) + (r * transition +  
+    1 | sub)
+   Data: data_all_shifted_recoded
+Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e+05))
+
+     AIC      BIC   logLik deviance df.resid 
+ 18012.8  18188.5  -8984.4  17968.8    21740 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-6.7216  0.1788  0.2975  0.4848  4.5325 
+
+Random effects:
+ Groups Name         Variance Std.Dev. Corr             
+ sub    (Intercept)  0.98494  0.9924                    
+        r            0.24812  0.4981    0.03            
+        transition   0.02889  0.1700   -0.42 -0.38      
+        r:transition 0.13210  0.3635    0.18 -0.44  0.77
+Number of obs: 21762, groups:  sub, 73
+
+Fixed effects:
+                          Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                1.81605    0.12111  14.995  < 2e-16 ***
+r                          0.48888    0.06761   7.231 4.79e-13 ***
+transition                -0.06426    0.03900  -1.648  0.09940 .  
+conditionBID              -0.13294    0.04278  -3.107  0.00189 ** 
+age_z                      0.17972    0.11911   1.509  0.13133    
+r:transition               0.16567    0.05438   3.047  0.00231 ** 
+r:conditionBID             0.03780    0.04278   0.883  0.37700    
+r:age_z                   -0.04320    0.06380  -0.677  0.49837    
+transition:conditionBID    0.04081    0.04282   0.953  0.34053    
+transition:age_z          -0.01906    0.03136  -0.608  0.54328    
+r:transition:conditionBID -0.03772    0.04277  -0.882  0.37782    
+r:transition:age_z         0.01001    0.04925   0.203  0.83889    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) r      trnstn cndBID age_z  r:trns r:cBID r:ag_z tr:BID trns:_
+r            0.055                                                               
+transition  -0.309 -0.191                                                        
+conditinBID -0.182 -0.066  0.219                                                 
+age_z        0.010  0.000 -0.013 -0.002                                          
+r:transitin  0.123 -0.434  0.437  0.013  0.001                                   
+r:condtnBID -0.037 -0.327  0.019  0.224 -0.002  0.157                            
+r:age_z      0.000  0.030 -0.001 -0.003  0.039 -0.019 -0.004                     
+trnstn:cBID  0.070  0.010 -0.567 -0.387  0.002 -0.082 -0.050  0.002              
+transtn:g_z -0.016 -0.001  0.077  0.009 -0.330  0.015  0.002 -0.233 -0.009       
+r:trnst:BID  0.006  0.126 -0.116 -0.050  0.001 -0.407 -0.387  0.004  0.224 -0.005
+r:trnstn:g_  0.001 -0.019  0.013  0.001  0.149  0.042  0.005 -0.432 -0.004  0.527
+            r::BID
+r                 
+transition        
+conditinBID       
+age_z             
+r:transitin       
+r:condtnBID       
+r:age_z           
+trnstn:cBID       
+transtn:g_z       
+r:trnst:BID       
+r:trnstn:g_ -0.006

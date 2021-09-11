@@ -81,13 +81,13 @@ data_all_shifted_recoded$cond_order = relevel(data_all_shifted_recoded$cond_orde
 data_all_shifted_recoded$condition = relevel(data_all_shifted_recoded$condition, ref="NT")
 
 
-save_outputs = FALSE;
+save_outputs = TRUE;
 
 # Fit data ---------------------------------
 model1 <- glmer(stay~r*transition*(group+condition)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
 summary(model1)
 if (save_outputs){
-  sink("model_summaries/simulated_data/model1_summary.txt")
+  sink("model_summaries/simulated_data/model1_summary_simulated.txt")
   print(summary(model1))
   sink()
 }
@@ -95,15 +95,15 @@ if (save_outputs){
 model1_2 <- glmer(stay~r*transition*(group+condition+age_z)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
 summary(model1_2)
 if (save_outputs){
-  sink("model_summaries/simulated_data/model1_2_summary.txt")
+  sink("model_summaries/simulated_data/model1_2_summary_simulated.txt")
   print(summary(model1_2))
   sink()
 }
-
+# 
 model2 <- glmer(stay~r*transition*(group*condition)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
 summary(model2)
 if (save_outputs){
-  sink("model_summaries/simulated_data/model2_summary.txt")
+  sink("model_summaries/simulated_data/model2_summary_simulated.txt")
   print(summary(model2))
   sink()
 }
@@ -111,7 +111,7 @@ if (save_outputs){
 model2_2 <- glmer(stay~r*transition*(group*condition+age_z)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
 summary(model2_2)
 if (save_outputs){
-  sink("model_summaries/simulated_data/model2_2_summary.txt")
+  sink("model_summaries/simulated_data/model2_2_summary_simulated.txt")
   print(summary(model2_2))
   sink()
 }
@@ -119,15 +119,15 @@ if (save_outputs){
 model3 <- glmer(stay~r*transition*(group)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
 summary(model3)
 if (save_outputs){
-  sink("model_summaries/simulated_data/model3_summary.txt")
+  sink("model_summaries/simulated_data/model3_summary_simulated.txt")
   print(summary(model3))
   sink()
 }
-
+# 
 model3_2 <- glmer(stay~r*transition*(group+age_z)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
 summary(model3_2)
 if (save_outputs){
-  sink("model_summaries/simulated_data/model3_2_summary.txt")
+  sink("model_summaries/simulated_data/model3_2_summary_simulated.txt")
   print(summary(model3_2))
   sink()
 }
@@ -135,7 +135,7 @@ if (save_outputs){
 model4 <- glmer(stay~r*transition*(condition)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
 summary(model4)
 if (save_outputs){
-  sink("model_summaries/simulated_data/model4_summary.txt")
+  sink("model_summaries/simulated_data/model4_summary_simulated.txt")
   print(summary(model4))
   sink()
 }
@@ -143,7 +143,7 @@ if (save_outputs){
 model4_2 <- glmer(stay~r*transition*(condition+age_z)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
 summary(model4_2)
 if (save_outputs){
-  sink("model_summaries/simulated_data/model4_2_summary.txt")
+  sink("model_summaries/simulated_data/model4_2_summary_simulated.txt")
   print(summary(model4_2))
   sink()
 }
@@ -151,7 +151,7 @@ if (save_outputs){
 model5 <- glmer(stay~r*transition+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
 summary(model5)
 if (save_outputs){
-  sink("model_summaries/simulated_data/model5_summary.txt")
+  sink("model_summaries/simulated_data/model5_summary_simulated.txt")
   print(summary(model5))
   sink()
 }
@@ -159,13 +159,14 @@ if (save_outputs){
 model5_2 <- glmer(stay~r*transition*(age_z)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
 summary(model5_2)
 if (save_outputs){
-  sink("model_summaries/simulated_data/model5_2_summary.txt")
+  sink("model_summaries/simulated_data/model5_2_summary_simulated.txt")
   print(summary(model5_2))
   sink()
 }
 
 
 # MB/MF scores ---------------------------------
+saveCSV_scores=FALSE
 data_all_scores<-NULL
 subs = unique(data_all_shifted_recoded$sub)
 conditions = unique(data_all_shifted_recoded$condition)
@@ -240,12 +241,16 @@ data_all_scores$group = relevel(data_all_scores$group, ref="HC")
 data_all_scores$cond_order = relevel(data_all_scores$cond_order, ref="NTfirst")
 data_all_scores$condition = relevel(data_all_scores$condition, ref="NT")
 
+if(saveCSV_scores){
+  write.csv(data_all_scores,"data/simulated/data_all_scores_simulated.csv",row.names = FALSE)
+}
 
+save_outputs=TRUE
 
 model_A_MB_score <- lmer(mb_score~group*condition+age_z+(1|sub),data=data_all_scores)
 summary(model_A_MB_score)
 if (save_outputs){
-  sink("model_summaries/simulated_data/model_A_MB_score_summary.txt")
+  sink("model_summaries/simulated_data/model_A_MB_score_summary_simulated.txt")
   print(summary(model_A_MB_score))
   sink()
 }
@@ -253,7 +258,7 @@ if (save_outputs){
 model_A_MF_score <- lmer(mf_score~group*condition+age_z+(1|sub),data=data_all_scores)
 summary(model_A_MF_score)
 if (save_outputs){
-  sink("model_summaries/simulated_data/model_A_MF_score_summary.txt")
+  sink("model_summaries/simulated_data/model_A_MF_score_summary_simulated.txt")
   print(summary(model_A_MF_score))
   sink()
 }
@@ -261,7 +266,7 @@ if (save_outputs){
 model_p_com_rew <- lmer(p_com_rew~group*condition+age_z+(1|sub),data=data_all_scores)
 summary(model_p_com_rew)
 if (save_outputs){
-  sink("model_summaries/simulated_data/model_p_com_rew_summary.txt")
+  sink("model_summaries/simulated_data/model_p_com_rew_summary_simulated.txt")
   print(summary(model_p_com_rew))
   sink()
 }
@@ -269,7 +274,7 @@ if (save_outputs){
 model_p_rare_unrew <- lmer(p_rare_unrew~group*condition+age_z+(1|sub),data=data_all_scores)
 summary(model_p_rare_unrew)
 if (save_outputs){
-  sink("model_summaries/simulated_data/model_p_rare_unrew_summary.txt")
+  sink("model_summaries/simulated_data/model_p_rare_unrew_summary_simulated.txt")
   print(summary(model_p_rare_unrew))
   sink()
 }
@@ -277,7 +282,7 @@ if (save_outputs){
 model_p_com_unrew <- lmer(p_com_unrew~group*condition+age_z+(1|sub),data=data_all_scores)
 summary(model_p_com_unrew)
 if (save_outputs){
-  sink("model_summaries/simulated_data/model_p_com_unrew_summary.txt")
+  sink("model_summaries/simulated_data/model_p_com_unrew_summary_simulated.txt")
   print(summary(model_p_com_unrew))
   sink()
 }
@@ -285,7 +290,7 @@ if (save_outputs){
 model_p_rare_rew <- lmer(p_rare_rew~group*condition+age_z+(1|sub),data=data_all_scores)
 summary(model_p_rare_rew)
 if (save_outputs){
-  sink("model_summaries/simulated_data/model_p_rare_rew_summary.txt")
+  sink("model_summaries/simulated_data/model_p_rare_rew_summary_simulated.txt")
   print(summary(model_p_rare_rew))
   sink()
 }

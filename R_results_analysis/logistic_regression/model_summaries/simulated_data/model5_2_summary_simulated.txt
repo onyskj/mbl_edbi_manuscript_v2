@@ -1,0 +1,44 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) [
+glmerMod]
+ Family: binomial  ( logit )
+Formula: stay ~ r * transition * (age_z) + (r * transition + 1 | sub)
+   Data: data_all_shifted_recoded
+Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e+05))
+
+     AIC      BIC   logLik deviance df.resid 
+ 17973.6  18117.5  -8968.8  17937.6    21882 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-6.6164  0.2055  0.3084  0.4819  5.3252 
+
+Random effects:
+ Groups Name         Variance Std.Dev. Corr             
+ sub    (Intercept)  0.80877  0.8993                    
+        r            0.08916  0.2986    0.02            
+        transition   0.01366  0.1169   -0.18 -0.53      
+        r:transition 0.03147  0.1774   -0.14 -0.09  0.83
+Number of obs: 21900, groups:  sub, 73
+
+Fixed effects:
+                     Estimate Std. Error z value Pr(>|z|)    
+(Intercept)         1.7652477  0.1081394  16.324   <2e-16 ***
+r                   0.5391601  0.0428107  12.594   <2e-16 ***
+transition         -0.0001516  0.0279091  -0.005   0.9957    
+age_z               0.1425600  0.1080420   1.319   0.1870    
+r:transition        0.0696105  0.0321227   2.167   0.0302 *  
+r:age_z             0.0076538  0.0424575   0.180   0.8569    
+transition:age_z   -0.0374748  0.0267577  -1.401   0.1614    
+r:transition:age_z -0.0273061  0.0312698  -0.873   0.3825    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) r      trnstn age_z  r:trns r:ag_z trns:_
+r            0.060                                          
+transition  -0.167 -0.290                                   
+age_z        0.008  0.010 -0.016                            
+r:transitin -0.116 -0.225  0.494 -0.010                     
+r:age_z      0.010  0.049 -0.032  0.055 -0.036              
+transtn:g_z -0.016 -0.031  0.102 -0.163  0.053 -0.285       
+r:trnstn:g_ -0.011 -0.036  0.055 -0.113  0.082 -0.209  0.485

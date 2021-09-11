@@ -44,7 +44,7 @@ data_all$condition = relevel(data_all$condition, ref="NT")
 # data_delta_w$cond_order = relevel(data_delta_w$cond_order, ref="NTfirst")
 
 
-save_outputs = FALSE;
+save_outputs = TRUE;
 
 model_MB <- lmer(beta_1_MB~group*condition+age_z+(1|sub),data=data_all)
 summary(model_MB)

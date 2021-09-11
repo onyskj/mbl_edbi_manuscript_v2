@@ -8,7 +8,7 @@ library(useful)
 library(Rpdb)
 library(tidyverse)
 
-save_outputs = TRUE
+save_outputs = FALSE
 
 NT=150
 model_par_names=c("beta_1_MB","beta_1_MF","beta_2","alpha", "pers")

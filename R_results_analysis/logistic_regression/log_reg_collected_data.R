@@ -164,7 +164,7 @@ if (save_outputs){
 
 
 # MB/MF scores ---------------------------------
-saveCSV_scores = FALSE
+saveCSV_scores = TRUE
 data_all_scores<-NULL
 subs = unique(data_all_shifted_recoded$sub)
 conditions = unique(data_all_shifted_recoded$condition)

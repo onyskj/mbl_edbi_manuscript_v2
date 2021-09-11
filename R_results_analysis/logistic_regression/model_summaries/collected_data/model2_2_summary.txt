@@ -1,0 +1,47 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) [
+glmerMod]
+ Family: binomial  ( logit )
+Formula: stay ~ r * transition * (group * condition + age_z) + (r * transition +  
+    1 | sub)
+   Data: data_all_shifted_recoded
+Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e+05))
+
+     AIC      BIC   logLik deviance df.resid 
+ 18018.3  18257.9  -8979.1  17958.3    21732 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-6.8491  0.1776  0.2989  0.4862  4.5668 
+
+Random effects:
+ Groups Name         Variance Std.Dev. Corr             
+ sub    (Intercept)  0.93514  0.9670                    
+        r            0.24356  0.4935   -0.01            
+        transition   0.02885  0.1699   -0.43 -0.39      
+        r:transition 0.12667  0.3559    0.13 -0.50  0.80
+Number of obs: 21762, groups:  sub, 73
+
+Fixed effects:
+                                   Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                        2.043496   0.168922  12.097  < 2e-16 ***
+r                                  0.564195   0.096821   5.827 5.64e-09 ***
+transition                        -0.078301   0.057396  -1.364  0.17250    
+groupED                           -0.447899   0.235864  -1.899  0.05757 .  
+conditionBID                      -0.138332   0.063559  -2.176  0.02952 *  
+age_z                              0.180401   0.116256   1.552  0.12072    
+r:transition                       0.226602   0.077786   2.913  0.00358 ** 
+groupED:conditionBID               0.013587   0.086065   0.158  0.87456    
+r:groupED                         -0.148553   0.133471  -1.113  0.26571    
+r:conditionBID                     0.043044   0.063578   0.677  0.49839    
+r:age_z                           -0.041657   0.063306  -0.658  0.51053    
+transition:groupED                 0.023341   0.075900   0.308  0.75845    
+transition:conditionBID            0.066428   0.063600   1.044  0.29627    
+transition:age_z                  -0.018548   0.031358  -0.592  0.55418    
+r:groupED:conditionBID            -0.007395   0.086050  -0.086  0.93151    
+transition:groupED:conditionBID   -0.042377   0.086132  -0.492  0.62272    
+r:transition:groupED              -0.122055   0.106087  -1.151  0.24993    
+r:transition:conditionBID         -0.002524   0.063500  -0.040  0.96830    
+r:transition:age_z                 0.009809   0.048500   0.202  0.83972    
+r:transition:groupED:conditionBID -0.063639   0.085995  -0.740  0.45928    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1

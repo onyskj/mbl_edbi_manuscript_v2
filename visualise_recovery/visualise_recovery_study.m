@@ -1,9 +1,14 @@
 % Visualise parameter recovery using EM-fitted parameters in Julia
 clear all; close all; clc;
-thetas_opt = load('params_recovered_study.csv');
-thetas = load('params_original_study.csv');
-NT = load('n_trials_study.csv');
+% thetas_opt = readtable('params_recovered_study.csv');
+% thetas = readtable('params_original_study.csv');
+% NT = load('n_trials_study.csv');
 
+thetas_opt = load('recovered.csv');
+thetas = load('original.csv');
+NT = 150;
+% load('n_trials_study.csv');
+%%
 NS = size(thetas,1);
 param_names = {'beta_mb','beta_mf','beta_2','alpha','rho'};
 
