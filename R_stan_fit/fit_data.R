@@ -5,7 +5,7 @@
 ##################
 
 # set wd, load packages and functions ---------------
-setwd("~/Google Drive/Academia/PostUoE_Man/manuscript_v2/hBayesDM/brown_my_version/HB_mine/best_version/") #from JO
+setwd("~/Google Drive/Academia/manuscripts/code/mbl_edbi_manuscript_v2/R_stan_fit/") #from JO
 date.time.append <-dget("date_time_append.R")
 library(rstan)
 library(shinystan)
@@ -18,7 +18,7 @@ rstan_options(auto_write = FALSE)
 options(mc.cores =  parallel::detectCores())
 
 # Load data ---------------
-data_all = read.csv("all_subjects.csv", header = T)
+data_all = read.csv("collected_data/all_subjects.csv", header = T)
 data_ed_nt = data_all[data_all$group=="ED" & data_all$condition=="NT",]
 subjs_ed_nt = unique(data_all[data_all$group=="ED" & data_all$condition=="NT",]$sub) #ED NT subjects
 data_ed_bid = data_all[data_all$group=="ED" & data_all$condition=="BID",]
@@ -35,23 +35,15 @@ list_names = c("ED_NT","ED_BID","HC_NT","HC_BID")
 
 # Set which models and datasets to use ---------------
 test_bool = FALSE;
-# model_name = 'foerde_JO.stan';
-# model_name_short='foerde_JO_wrong_ship';
 model_name = 'foerde_alter_JO.stan';
 model_name_short='foerde_alter_JO_wrong_ship';
 
-# model_name = 'foerde_alter_gamma_JO.stan';
-# model_name_short='foerde_alter_gamma_JO_wrong_ship';
-
-
-# model_name_short='foerde_JO';
 if (test_bool){
   model_name_short=paste(model_name_short,'test',sep='_')
 }
 model_par_names=c("beta_1_MB","beta_1_MF","beta_2","alpha", "pers")
-# model_par_names=c("beta_1_MB","beta_1_MF","beta_2","alpha", "pers","rho")
+with_w=c('foerde_alter_JO.stan')
 
-with_w=c('foerde_JO.stan','foerde_rewsen_JO.stan','foerde_alter_JO.stan','foerde_alter_gamma_JO.stan');
 if (model_name %in% with_w){
   model_par_names_full=c(model_par_names,"w")
 }
@@ -104,14 +96,13 @@ for (i in sets){
   ind_stan_list=list(set=list_names[i],nS=nS,nT=nT,choice=choice,state_2=state,reward=reward,
                     missing_choice=missing_choice,missing_reward=missing_reward)
   ind_info_list=list(sub=ind_info_list_sub,group=ind_info_list_group,condition=ind_info_list_condition,age=ind_info_list_age, cond_order=ind_info_list_cond_order)
-  # stan_lists[[length(stan_lists)+1]]<-ind_stan_list
   stan_lists[[i]]<-ind_stan_list
   info_lists[[i]]<-ind_info_list
 }
 
 # Fit the data----
 iters = 4000;
-iters = 1000;
+iters = 10;
 
 HBA_fits = list();
 

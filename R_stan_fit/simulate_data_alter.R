@@ -1,4 +1,5 @@
 simseq <- function(NT,NS,params){
+  #generate random walk for rewards
   sigma = 0.025*1.1;
   rewardRange_hi = 0.75;
   rewardRange_lo = 0.25;
@@ -7,7 +8,6 @@ simseq <- function(NT,NS,params){
   prob_rew[2,,1]=c((0.45-0.31)*runif(1)+0.31,(0.72-0.58)*runif(1)+0.58)
   
   for (t in 1:(NT-1)){
-    # print(t)
     re = prob_rew[,,t]+matrix(rnorm(4,0,sigma),2,2)
     re[re>rewardRange_hi]=2*rewardRange_hi-re[re>rewardRange_hi]
     re[re<rewardRange_lo]=2*rewardRange_lo-re[re<rewardRange_lo]
@@ -30,7 +30,6 @@ simseq <- function(NT,NS,params){
   tran_type = array(0,dim=c(1,2))
   
   for (s in 1:NS) {
-    
     #set initial values
     for (i in 1:2) {
       Q_TD[i]=.5;
@@ -54,22 +53,13 @@ simseq <- function(NT,NS,params){
       tran_count = if(state_2[s,t]-choice[s,t,1]-1==0){1}else{2};
       tran_type[tran_count] = tran_type[tran_count] + 1;
       
-      Q_TD[choice[s,t,1]+1] = (1-alpha[s])*Q_TD[choice[s,t,1]+1] + reward[s,t]; # <-------------mine
-      # Q_TD[choice[s,t,1]+1] = Q_TD[choice[s,t,1]+1] + alpha[s]*(reward[s,t]-Q_TD[choice[s,t,1]+1]) ; # <-------------mine unuscaled
-      Q_2[state_2[s,t],choice[s,t,2]+1] = (1-alpha[s])*Q_2[state_2[s,t],choice[s,t,2]+1] + reward[s,t]; # <-------------mine
-      # Q_2[state_2[s,t],choice[s,t,2]+1] = Q_2[state_2[s,t],choice[s,t,2]+1] + alpha[s]*(reward[s,t]-Q_2[state_2[s,t],choice[s,t,2]+1]) ; # <-------------mine unscaled
+      Q_TD[choice[s,t,1]+1] = (1-alpha[s])*Q_TD[choice[s,t,1]+1] + reward[s,t];
+      Q_2[state_2[s,t],choice[s,t,2]+1] = (1-alpha[s])*Q_2[state_2[s,t],choice[s,t,2]+1] + reward[s,t];
       
       Q_MB[1] = max(Q_2[1,1],Q_2[1,2]); # <-------------mine
       Q_MB[2] = max(Q_2[2,1],Q_2[2,2]); # <-------------mine
       
-      # Q_MB[1] = if(tran_type[1] > tran_type[2]) { (.7*max(Q_2[1,1],Q_2[1,2]) + .3*max(Q_2[2,1],Q_2[2,2]))} else{ (.3*max(Q_2[1,1],Q_2[1,2]) + .7*max(Q_2[2,1],Q_2[2,2]))};
-      
-      # Q_MB[2] = if(tran_type[1] > tran_type[2]) { (.3*max(Q_2[1,1],Q_2[1,2]) + .7*max(Q_2[2,1],Q_2[2,2]))}else{(.7*max(Q_2[1,1],Q_2[1,2]) + .3*max(Q_2[2,1],Q_2[2,2]))};
-      # 
-      #softmaximum
-      # Q_MB[1] = (1/(1+exp(-5*(Q_2[1,1]-Q_2[1,2])))) * Q_2[1,1] + (1-(1/(1+exp(-5*(Q_2[1,1]-Q_2[1,2]))))) * Q_2[1,2];
-      # Q_MB[2] = (1/(1+exp(-5*(Q_2[2,1]-Q_2[2,2])))) * Q_2[2,1] + (1-(1/(1+exp(-5*(Q_2[2,1]-Q_2[2,2]))))) * Q_2[2,2];
-      
+      ##decaying unvisted states and unchosen actions by (1-alpha)
       unchosen1 = if(choice[s,t,1]>0){0}else{1};
       unchosen2 = if(choice[s,t,2]>0){0}else{1};
       unvisited = if(state_2[s,t]>1){1}else{2};
@@ -78,10 +68,7 @@ simseq <- function(NT,NS,params){
       Q_2[unvisited,2]=Q_2[unvisited,2]*(1-alpha[s]);
       Q_2[state_2[s,t],unchosen2+1]=Q_2[state_2[s,t],unchosen2+1]*(1-alpha[s]);
       # Q_MB[unchosen1+1]=Q_MB[unchosen1+1]*(1-alpha[s]);
-      
     }
-    
-    
   }
   return(list(choices=choice,states=state_2,rewards=reward))
 }

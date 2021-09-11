@@ -1,4 +1,4 @@
-setwd("~/Google Drive/Academia/PostUoE_Man/manuscript_v2/hBayesDM/brown_my_version/HB_mine/best_version/") #from JO
+setwd("~/Google Drive/Academia/manuscripts/code/mbl_edbi_manuscript_v2/R_stan_fit/") #from JO
 library(MASS)
 library(boot)
 library(Rlab)
@@ -30,24 +30,11 @@ U=1-err;
 L2=0+err;
 U2=1000-err;
 
-model_name = 'foerde_JO.stan';
-simulate_name = 'simulate_data.R';
-
 model_name = 'foerde_alter_JO.stan';
 simulate_name = 'simulate_data_alter.R';
 
 model_par_names=c("beta_1_MB","beta_1_MF","beta_2","alpha", "pers")
-param_sum_filename = 'fitted_ind_params_summary_2021_08_31_21_19_07_HC_NT_foerde_JO.csv'
-param_sum_filename = 'fitted_ind_params_summary_2021_09_05_17_15_57_niter_1000_HC_NT_foerde_JO_wrong_ship.csv'
-param_sum_filename = 'fitted_ind_params_summary_2021_09_06_00_28_41_niter_4000_HC_NT_foerde_JO_wrong_ship.csv'
-param_sum_filename = 'fitted_ind_params_summary_2021_09_07_12_38_29_niter_1000_HC_NT_foerde_alter_JO_wrong_ship.csv'
-param_sum_filename = 'fitted_ind_params_summary_2021_09_07_11_41_15_niter_1000_ED_NT_foerde_alter_JO_wrong_ship.csv'
-param_sum_filename = 'fitted_ind_params_summary_2021_09_07_19_40_17_niter_1000_ED_NT_foerde_alter_JO_wrong_ship.csv'
-param_sum_filename = 'fitted_ind_params_summary_2021_09_08_23_39_08_niter_1000_HC_NT_foerde_alter_JO_wrong_ship.csv'
 param_sum_filename = 'fitted_ind_params_summary_2021_09_09_05_00_16_niter_4000_HC_NT_foerde_alter_JO_wrong_ship.csv'
-param_sum_filename = 'fitted_ind_params_summary_2021_09_10_12_54_00_niter_1000_HC_NT_foerde_alter_gamma_JO_wrong_ship.csv'
-
-
 
 fitted_par_sum <- read.csv(paste("output/params/CSV/",param_sum_filename,sep=''), header = T)
 fitted_par_sum$X<-NULL
