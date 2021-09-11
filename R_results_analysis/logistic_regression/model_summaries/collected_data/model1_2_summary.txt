@@ -1,0 +1,43 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) [
+glmerMod]
+ Family: binomial  ( logit )
+Formula: stay ~ r * transition * (group + condition + age_z) + (r * transition +  
+    1 | sub)
+   Data: data_all_shifted_recoded
+Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e+05))
+
+     AIC      BIC   logLik deviance df.resid 
+ 18011.1  18218.7  -8979.5  17959.1    21736 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-6.8624  0.1778  0.2972  0.4845  4.5898 
+
+Random effects:
+ Groups Name         Variance Std.Dev. Corr             
+ sub    (Intercept)  0.9349   0.9669                    
+        r            0.2436   0.4935   -0.01            
+        transition   0.0290   0.1703   -0.43 -0.38      
+        r:transition 0.1267   0.3559    0.13 -0.50  0.79
+Number of obs: 21762, groups:  sub, 73
+
+Fixed effects:
+                           Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                2.040612   0.167434  12.188  < 2e-16 ***
+r                          0.566859   0.093779   6.045  1.5e-09 ***
+transition                -0.066030   0.052126  -1.267 0.205246    
+groupED                   -0.441136   0.232067  -1.901 0.057315 .  
+conditionBID              -0.132563   0.042790  -3.098 0.001948 ** 
+age_z                      0.180491   0.116261   1.552 0.120552    
+r:transition               0.244634   0.073921   3.309 0.000935 ***
+r:groupED                 -0.152705   0.126015  -1.212 0.225591    
+r:conditionBID             0.038230   0.042789   0.893 0.371609    
+r:age_z                   -0.041679   0.063310  -0.658 0.510321    
+transition:groupED         0.002104   0.061880   0.034 0.972881    
+transition:conditionBID    0.041483   0.042828   0.969 0.332747    
+transition:age_z          -0.018303   0.031393  -0.583 0.559875    
+r:transition:groupED      -0.154377   0.096490  -1.600 0.109613    
+r:transition:conditionBID -0.038146   0.042780  -0.892 0.372562    
+r:transition:age_z         0.009991   0.048500   0.206 0.836794    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1

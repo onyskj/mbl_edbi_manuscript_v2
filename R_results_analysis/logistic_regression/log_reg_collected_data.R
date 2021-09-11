@@ -71,8 +71,15 @@ if (recodeMe || shiftMe){
 if(load_recoded && !(recodeMe || shiftMe)){
   data_all_shifted_recoded = read.table("data/collected/data_all_shifted_recoded.csv",sep=",",header=T)
 }
-
 save_outputs = TRUE;
+
+data_all_shifted_recoded$group=factor(data_all_shifted_recoded$group)
+data_all_shifted_recoded$cond_order=factor(data_all_shifted_recoded$cond_order)
+data_all_shifted_recoded$condition=factor(data_all_shifted_recoded$condition)
+
+data_all_shifted_recoded$group = relevel(data_all_shifted_recoded$group, ref="HC")
+data_all_shifted_recoded$cond_order = relevel(data_all_shifted_recoded$cond_order, ref="NTfirst")
+data_all_shifted_recoded$condition = relevel(data_all_shifted_recoded$condition, ref="NT")
 
 # Fit data ---------------------------------
 model1 <- glmer(stay~r*transition*(group+condition)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
@@ -157,6 +164,7 @@ if (save_outputs){
 
 
 # MB/MF scores ---------------------------------
+saveCSV_scores = FALSE
 data_all_scores<-NULL
 subs = unique(data_all_shifted_recoded$sub)
 conditions = unique(data_all_shifted_recoded$condition)
@@ -231,6 +239,11 @@ data_all_scores$group = relevel(data_all_scores$group, ref="HC")
 data_all_scores$cond_order = relevel(data_all_scores$cond_order, ref="NTfirst")
 data_all_scores$condition = relevel(data_all_scores$condition, ref="NT")
 
+if(saveCSV_scores){
+  write.csv(data_all_scores,"data/collected/data_all_scores.csv",row.names = FALSE)
+}
+
+save_outputs=TRUE
 model_A_MB_score <- lmer(mb_score~group*condition+age_z+(1|sub),data=data_all_scores)
 summary(model_A_MB_score)
 if (save_outputs){

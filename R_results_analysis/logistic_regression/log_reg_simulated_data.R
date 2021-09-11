@@ -72,6 +72,14 @@ if(load_recoded && !(recodeMe || shiftMe)){
   data_all_shifted_recoded = read.table(paste('data/simulated/',file_name_load,"_shifted_recoded.csv",sep=''),sep=",",header=T)
 }
 
+data_all_shifted_recoded$group=factor(data_all_shifted_recoded$group)
+data_all_shifted_recoded$cond_order=factor(data_all_shifted_recoded$cond_order)
+data_all_shifted_recoded$condition=factor(data_all_shifted_recoded$condition)
+
+data_all_shifted_recoded$group = relevel(data_all_shifted_recoded$group, ref="HC")
+data_all_shifted_recoded$cond_order = relevel(data_all_shifted_recoded$cond_order, ref="NTfirst")
+data_all_shifted_recoded$condition = relevel(data_all_shifted_recoded$condition, ref="NT")
+
 
 save_outputs = FALSE;
 
