@@ -48,8 +48,8 @@ if (model_name %in% with_w){
   model_par_names_full=c(model_par_names,"w")
 }
 # sets = 1:length(data_list);
-# sets = 1:4
-sets = 3
+sets = 1:4
+# sets = 3
 save_outputs = TRUE;
 
 # Prepare data for stan ---------------
@@ -102,7 +102,7 @@ for (i in sets){
 
 # Fit the data----
 iters = 4000;
-iters = 10;
+# iters = 10;
 
 HBA_fits = list();
 

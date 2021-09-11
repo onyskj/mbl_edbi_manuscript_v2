@@ -1,4 +1,4 @@
-setwd("~/Google Drive/Academia/PostUoE_Man/manuscript_v2/hBayesDM/brown_my_version/HB_mine/best_version/simulated/") #from JO
+setwd("~/Google Drive/Academia/manuscripts/code/mbl_edbi_manuscript_v2/R_stan_fit/simulate_data/") #from JO
 library(MASS)
 library(boot)
 library(Rlab)
@@ -20,15 +20,12 @@ results_nt_hc = read.table(Sys.glob(file.path('fitted_params/', "*HC_NT*.csv")),
 results_tr_hc = read.table(Sys.glob(file.path('fitted_params/', "*HC_BID*.csv")),sep=",",header=T)
 
 thetas_winfo=list(results_nt_ed,results_tr_ed,results_nt_hc,results_tr_hc)
-# output_converted_all = list()
+output_converted_all = NULL
 params_filename = str_replace(str_replace(paste(Sys.glob(file.path('fitted_params/', "*ED_NT*.csv")),'_plus',sep=''),'.csv',''),'fitted_params//','')
-
-# thetas_winfo <- read.csv(paste("output/params/CSV/",params_filename,sep=''), header = T)
 
 for (j in 1:length(thetas_winfo)){
   thetas = thetas_winfo[[j]][,1:5]
   subject_info = thetas_winfo[[j]][,7:11]
-  
   
   NS=dim(thetas)[1]
   
@@ -42,7 +39,6 @@ for (j in 1:length(thetas_winfo)){
   output_converted$age <-rep(0,dim(subject_info)[1]*NT)
   output_converted$cond_order <-rep(0,dim(subject_info)[1]*NT)
   output_converted$condition <-rep(0,dim(subject_info)[1]*NT)
-  # output_converted$trialNo <-rep(0,dim(subject_info)[1]*NT)
   output_converted$trialNo <-rep(1:150,dim(subject_info)[1])
   output_converted$ch1 <-rep(0,dim(subject_info)[1]*NT)
   output_converted$rt1 <-rep(NA,dim(subject_info)[1]*NT)
@@ -56,7 +52,6 @@ for (j in 1:length(thetas_winfo)){
   i=0
   for (s in subject_info$sub){
     i=i+1
-    # for (s in 2){
     output_converted[(NT*(i-1)+1):(NT*i),]$sub=s
     output_converted[(NT*(i-1)+1):(NT*i),]$group=unique(subject_info[subject_info$sub==s,]$group)
     output_converted[(NT*(i-1)+1):(NT*i),]$age=unique(subject_info[subject_info$sub==s,]$age)
@@ -66,33 +61,14 @@ for (j in 1:length(thetas_winfo)){
     output_converted[(NT*(i-1)+1):(NT*i),]$st = output[["states"]][i,]
     output_converted[(NT*(i-1)+1):(NT*i),]$ch2 = output[["choices"]][i,,2]
     output_converted[(NT*(i-1)+1):(NT*i),]$r = output[["rewards"]][i,]
-    
-    # output_converted[(NT*(i-1)+1):(NT*i),]$transition = rep(0,NT)
-    
     output_converted[(NT*(i-1)+1):(NT*i),][((output$choices[i,,1] + output$states[i,]) %% 2)== 1,]$transition=1
-    
     output_converted[(NT*(i-1)+1):(NT*i),]$ch1 = output_converted[(NT*(i-1)+1):(NT*i),]$ch1 + 1
     output_converted[(NT*(i-1)+1):(NT*i),]$st = output_converted[(NT*(i-1)+1):(NT*i),]$st +1
     output_converted[(NT*(i-1)+1):(NT*i),]$ch2 = output_converted[(NT*(i-1)+1):(NT*i),]$ch2 +1
-    
     output_converted[(NT*(i-1)+1):(NT*i),]$stay = (c(1,diff(output_converted[(NT*(i-1)+1):(NT*i),]$ch1))==0)*1
-    # ((thetas$choices[i,,1] + thetas$states[i,1]) %% 2)== 0 #rare
-    # ((thetas$choices[i,,1] + thetas$states[i,1]) %% 2)== 1 #common
-    
-    
   }
-  # output_converted_all[[length(output_converted_all)+1]]=output_converted
   output_converted_all = rbind(output_converted_all,output_converted)
-  
 }
-
-
-
 if (save_outputs){
   write.csv(output_converted_all,file=paste("simulated_data",'_from_',params_filename,'.csv',sep=''),row.names=FALSE)
 }
-
-
-
-
-
