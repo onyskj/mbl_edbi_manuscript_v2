@@ -72,7 +72,7 @@ if(load_recoded && !(recodeMe || shiftMe)){
   data_all_shifted_recoded = read.table("data/collected/data_all_shifted_recoded.csv",sep=",",header=T)
 }
 
-save_outputs = FALSE;
+save_outputs = TRUE;
 
 # Fit data ---------------------------------
 model1 <- glmer(stay~r*transition*(group+condition)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
