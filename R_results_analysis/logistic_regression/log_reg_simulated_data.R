@@ -13,6 +13,7 @@ recodeMe=FALSE
 load_recoded=TRUE
 saveCSV=FALSE
 file_name_load = "simulated_data_from_fitted_ind_params_df_2021_09_09_02_06_39_ED_NT_niter_4000_foerde_alter_JO_wrong_ship_plus"
+
 # Shift data ---------------------------------
 if(shiftMe){
   data_all = read.table(paste('data/simulated/',file_name_load,".csv",sep=""),sep=",",header=T)

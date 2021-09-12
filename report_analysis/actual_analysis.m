@@ -382,6 +382,8 @@ axisFontSize=30;
 condnames = {'Neutral condition','BID condition'};
 colors_cond = {[0.4660 0.6740 0.1880], [0.5940, 0.2840, 0.6560];...
     '#e7f4d7', '#ecdbf0'};
+colors_cond = {'#ff7733',  '#3399ff';...
+    '#ffddcc', '#cce6ff'};
 for k=1:2
     subplot(1,2,k)
     
