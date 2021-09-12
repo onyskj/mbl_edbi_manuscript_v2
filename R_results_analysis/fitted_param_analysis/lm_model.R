@@ -18,9 +18,14 @@ data_all=rbind(results_nt_ed,results_tr_ed,results_nt_hc,results_tr_hc)
 data_all$age_z = rep(0,dim(data_all)[1])
 
 
-for (i in data_all$sub){
+# for (i in data_all$sub){
+#   locator_temp0=which(data_all$sub==i)
+#   locator_temp=which(data_all$condition=='NT' & data_all$group==unique(data_all$group[data_all$sub==i]))
+#   data_all[locator_temp0,]$age_z = (data_all[locator_temp0,]$age-mean(data_all[locator_temp,]$age,na.rm = TRUE))/sd(data_all[locator_temp,]$age,na.rm=TRUE)
+# }
+for (i in unique(data_all$sub)){
   locator_temp0=which(data_all$sub==i)
-  locator_temp=which(data_all$condition=='NT' & data_all$group==unique(data_all$group[data_all$sub==i]))
+  locator_temp=which(data_all$condition=='NT')
   data_all[locator_temp0,]$age_z = (data_all[locator_temp0,]$age-mean(data_all[locator_temp,]$age,na.rm = TRUE))/sd(data_all[locator_temp,]$age,na.rm=TRUE)
 }
 
@@ -32,6 +37,21 @@ data_all$group = relevel(data_all$group, ref="HC")
 data_all$cond_order = relevel(data_all$cond_order, ref="NTfirst")
 data_all$condition = relevel(data_all$condition, ref="NT")
 
+# #---------------- Add qs data
+# ppt_qs_data = read.table('ppt_data/qs_scores.csv',sep=",",header=T)
+# data_all$eat26_z = rep(0,dim(data_all)[1])
+# data_all$aai_z = rep(0,dim(data_all)[1])
+# data_all$ocir_z = rep(0,dim(data_all)[1])
+# 
+# for (i in unique(data_all$sub)){
+#   locator_temp0=which(data_all$sub==i)
+#   locator_temp=which(ppt_qs_data$sub==i)
+#   data_all[locator_temp0,]$eat26_z = (ppt_qs_data[locator_temp,]$EAT_26-mean(ppt_qs_data$EAT_26,na.rm = TRUE))/sd(ppt_qs_data$EAT_26,na.rm=TRUE)
+#   data_all[locator_temp0,]$aai_z = (ppt_qs_data[locator_temp,]$AAI-mean(ppt_qs_data$AAI,na.rm = TRUE))/sd(ppt_qs_data$AAI,na.rm=TRUE)
+#   data_all[locator_temp0,]$ocir_z = (ppt_qs_data[locator_temp,]$OCI_R-mean(ppt_qs_data$AAI,na.rm = TRUE))/sd(ppt_qs_data$OCI_R,na.rm=TRUE)
+# }
+
+
 # data_delta_w$age_z = rep(0,dim(data_delta_w)[1])
 # for (i in data_delta_w$sub){
 #   data_delta_w[data_delta_w$sub==i,]$age_z=unique(data_all[data_all$sub==i,]$age_z)
@@ -42,6 +62,7 @@ data_all$condition = relevel(data_all$condition, ref="NT")
 # 
 # data_delta_w$group = relevel(data_delta_w$group, ref="HC")
 # data_delta_w$cond_order = relevel(data_delta_w$cond_order, ref="NTfirst")
+
 
 
 save_outputs = TRUE;
@@ -93,4 +114,12 @@ if (save_outputs){
   print(summary(model_w))
   sink()
 }
+
+# model_w_scores <- lmer(beta_1_MB~(eat26_z+ocir_z+aai_z+age_z)*condition+(1|sub),data=data_all)
+# summary(model_w_scores)
+# if (save_outputs){
+#   sink("model_summaries/model_w_summary.txt")
+#   print(summary(model_w))
+#   sink()
+# }
 

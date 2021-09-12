@@ -16,8 +16,28 @@ delta_w_hc = array2table(results_tr_hc{:,6} - results_nt_hc{:,6},'VariableNames'
 qs_scores = readtable("data/qs_scores.csv");
 qs_scores.bmi=qs_scores.weight./(qs_scores.height/100).^2;
 qs_scores.age_z=qs_scores.age2;
-qs_scores(contains(qs_scores.group,'HC'),:).age_z=(qs_scores(contains(qs_scores.group,'HC'),:).age2-nanmean(qs_scores(contains(qs_scores.group,'HC'),:).age2))/nanstd(qs_scores(contains(qs_scores.group,'HC'),:).age2);
-qs_scores(contains(qs_scores.group,'ED'),:).age_z=(qs_scores(contains(qs_scores.group,'ED'),:).age2-nanmean(qs_scores(contains(qs_scores.group,'ED'),:).age2))/nanstd(qs_scores(contains(qs_scores.group,'ED'),:).age2);
+% qs_scores(contains(qs_scores.group,'HC'),:).age_z=(qs_scores(contains(qs_scores.group,'HC'),:).age2-nanmean(qs_scores(contains(qs_scores.group,'HC'),:).age2))/nanstd(qs_scores(contains(qs_scores.group,'HC'),:).age2);
+% qs_scores(contains(qs_scores.group,'ED'),:).age_z=(qs_scores(contains(qs_scores.group,'ED'),:).age2-nanmean(qs_scores(contains(qs_scores.group,'ED'),:).age2))/nanstd(qs_scores(contains(qs_scores.group,'ED'),:).age2);
+qs_scores.age_z=(qs_scores.age2-nanmean(qs_scores.age2))/nanstd(qs_scores.age2);
+
+qs_scores.EAT_26_z=qs_scores.EAT_26;
+% qs_scores(contains(qs_scores.group,'HC'),:).EAT_26_z=(qs_scores(contains(qs_scores.group,'HC'),:).EAT_26-nanmean(qs_scores(contains(qs_scores.group,'HC'),:).EAT_26))/nanstd(qs_scores(contains(qs_scores.group,'HC'),:).EAT_26);
+% qs_scores(contains(qs_scores.group,'ED'),:).EAT_26_z=(qs_scores(contains(qs_scores.group,'ED'),:).EAT_26-nanmean(qs_scores(contains(qs_scores.group,'ED'),:).EAT_26))/nanstd(qs_scores(contains(qs_scores.group,'ED'),:).EAT_26);
+qs_scores.EAT_26_z=(qs_scores.EAT_26-nanmean(qs_scores.EAT_26))/nanstd(qs_scores.EAT_26);
+
+qs_scores.AAI_z=qs_scores.AAI;
+% qs_scores(contains(qs_scores.group,'HC'),:).AAI_z=(qs_scores(contains(qs_scores.group,'HC'),:).AAI-nanmean(qs_scores(contains(qs_scores.group,'HC'),:).AAI))/nanstd(qs_scores(contains(qs_scores.group,'HC'),:).AAI);
+% qs_scores(contains(qs_scores.group,'ED'),:).AAI_z=(qs_scores(contains(qs_scores.group,'ED'),:).AAI-nanmean(qs_scores(contains(qs_scores.group,'ED'),:).AAI))/nanstd(qs_scores(contains(qs_scores.group,'ED'),:).AAI);
+qs_scores.AAI_z=(qs_scores.AAI-nanmean(qs_scores.AAI))/nanstd(qs_scores.AAI);
+
+qs_scores.OCI_R_z=qs_scores.OCI_R;
+% qs_scores(contains(qs_scores.group,'HC'),:).OCI_R_z=(qs_scores(contains(qs_scores.group,'HC'),:).OCI_R-nanmean(qs_scores(contains(qs_scores.group,'HC'),:).OCI_R))/nanstd(qs_scores(contains(qs_scores.group,'HC'),:).OCI_R);
+% qs_scores(contains(qs_scores.group,'ED'),:).OCI_R_z=(qs_scores(contains(qs_scores.group,'ED'),:).OCI_R-nanmean(qs_scores(contains(qs_scores.group,'ED'),:).OCI_R))/nanstd(qs_scores(contains(qs_scores.group,'ED'),:).OCI_R);
+qs_scores.OCI_R_z=(qs_scores.OCI_R-nanmean(qs_scores.OCI_R))/nanstd(qs_scores.OCI_R);
+
+qs_scores.bmi_z=qs_scores.bmi;
+qs_scores.bmi_z=(qs_scores.bmi-nanmean(qs_scores.bmi))/nanstd(qs_scores.bmi);
+
 subject_info = [qs_scores(:,2),readtable("data/subject_info.csv")];
 results_all = {results_nt_ed,results_tr_ed,results_nt_hc,results_tr_hc};
 subject_info_groups={subject_info(contains(subject_info.group,'HC'),:),subject_info(contains(subject_info.group,'ED'),:)};
@@ -85,6 +105,7 @@ for i=1:size(dem_qs_stat_tests,1)
     dem_qs_stat_tests(i,:)= [p,stats.tstat,stats.sd];
 end
 dem_qs_stat_tests = array2table(dem_qs_stat_tests,'VariableNames',{'p-value','t-value','sd'},'RowNames',{'EAT-26', 'AAI', 'OCI-R', 'height', 'weight', 'bmi','age'});
+
 %% Task performance Welch's test (HC vs ED)
 task_stat_tests = zeros(size(task_data,2),3); %(rew_nt,rew_tr,total_rew, avg_rt1, avg_rt2,avg_rt,avg_rt1_nt, avg_rt2_nt,avg_rt_nt,avg_rt1_tr, avg_rt2_tr,avg_rt_tr)x(p-value, t-value, sd)
 for i=1:size(task_stat_tests,1)
@@ -93,6 +114,7 @@ for i=1:size(task_stat_tests,1)
 end
 task_stat_tests = array2table(task_stat_tests,'VariableNames',{'p-value','t-value','sd'},'RowNames',{'total_reward_nt','total_reward_tr','total_reward',...
     'avg_rt1','avg_rt2','avg_rt','avg_rt1_nt','avg_rt2_nt','avg_rt_nt','avg_rt1_tr','avg_rt2_tr','avg_rt_tr'});
+
 %% Save to csv
 %demo+qs: stats and info
 writetable(dem_qs_stat_tests,'tables/dem_qs_stat_tests.csv','WriteRowNames',true)
@@ -223,6 +245,7 @@ lineWidthSize=5;
 lineColour = [0.8500, 0.3250, 0.0980];
 
 scores_for_corr = {scores.EAT_26,scores.AAI,scores.OCI_R,scores.bmi,scores.age_z};
+scores_for_corr = {scores.EAT_26_z,scores.AAI_z,scores.OCI_R_z,scores.bmi_z,scores.age_z};
 names = {'EAT-26 score','AAI score', 'OCI-R score','BMI','Age'};
 
 for i=1:length(scores_for_corr)
@@ -354,7 +377,7 @@ for i=1:size(data_all_scores_simulated_summary,1)
     end
 end
 
-figure
+close all
 axisFontSize=30;
 condnames = {'Neutral condition','BID condition'};
 colors_cond = {[0.4660 0.6740 0.1880], [0.5940, 0.2840, 0.6560];...
@@ -401,7 +424,7 @@ rew_2_x=910;
 rwidth=110;
 unwidth=135;
 rew_unre_dist=170;
-uicontrol('style','text','string','rewarded','position',[rew_1_x,90,rwidth,30],'fontSize',axisFontSize-7.5,'FontWeight','bold');
+a=uicontrol('style','text','string','rewarded','position',[rew_1_x,90,rwidth,30],'fontSize',axisFontSize-7.5,'FontWeight','bold');
 uicontrol('style','text','string','unrewarded','position',[rew_1_x+rew_unre_dist,90,unwidth,30],'fontSize',axisFontSize-7.5,'FontWeight','bold');
 uicontrol('style','text','string','rewarded','position',[rew_2_x,90,rwidth,30],'fontSize',axisFontSize-7.5,'FontWeight','bold');
 uicontrol('style','text','string','unrewarded','position',[rew_2_x+rew_unre_dist,90,unwidth,30],'fontSize',axisFontSize-7.5,'FontWeight','bold');

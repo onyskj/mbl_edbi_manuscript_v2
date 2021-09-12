@@ -32,11 +32,18 @@ if(shiftMe){
   }
   
   data_all_shifted$age_z = rep(0,dim(data_all_shifted)[1])
-  for (i in data_all_shifted$sub){
+  # for (i in unique(data_all_shifted$sub)){
+  #   locator_temp0=which(data_all_shifted$sub==i)
+  #   locator_temp=which(data_all$group==unique(data_all$group[data_all$sub==i])& data_all_shifted$condition=='NT')
+  #   data_all_shifted[locator_temp0,]$age_z = (data_all_shifted[locator_temp0,]$age-mean(data_all_shifted[locator_temp,]$age,na.rm = TRUE))/sd(data_all_shifted[locator_temp,]$age,na.rm=TRUE)
+  # }
+  for (i in unique(data_all_shifted$sub)){
     locator_temp0=which(data_all_shifted$sub==i)
-    locator_temp=which(data_all$group==unique(data_all$group[data_all$sub==i])& data_all_shifted$condition=='NT')
+    locator_temp=which(data_all_shifted$trialNo==1 & data_all_shifted$condition=='NT')
+    # locator_temp=which(data_all$group==unique(data_all$group[data_all$sub==i])& data_all_shifted$condition=='NT')
     data_all_shifted[locator_temp0,]$age_z = (data_all_shifted[locator_temp0,]$age-mean(data_all_shifted[locator_temp,]$age,na.rm = TRUE))/sd(data_all_shifted[locator_temp,]$age,na.rm=TRUE)
   }
+  
   if(saveCSV){
     write.csv(data_all_shifted,paste('data/simulated/',file_name_load,'_shifted.csv',sep=''),row.names = FALSE)
   }

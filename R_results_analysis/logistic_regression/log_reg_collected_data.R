@@ -30,14 +30,19 @@ if(shiftMe){
       data_all_shifted[locator_temp,]$r<-shift(data_all_shifted[locator_temp,]$r,1)
     }
   }
-  
-  
   data_all_shifted$age_z = rep(0,dim(data_all_shifted)[1])
-  for (i in data_all_shifted$sub){
+  # for (i in unique(data_all_shifted$sub)){
+  #   locator_temp0=which(data_all_shifted$sub==i)
+  #   locator_temp=which(data_all$group==unique(data_all$group[data_all$sub==i])& data_all_shifted$condition=='NT')
+  #   data_all_shifted[locator_temp0,]$age_z = (data_all_shifted[locator_temp0,]$age-mean(data_all_shifted[locator_temp,]$age,na.rm = TRUE))/sd(data_all_shifted[locator_temp,]$age,na.rm=TRUE)
+  # }
+  for (i in unique(data_all_shifted$sub)){
     locator_temp0=which(data_all_shifted$sub==i)
-    locator_temp=which(data_all$group==unique(data_all$group[data_all$sub==i])& data_all_shifted$condition=='NT')
+    locator_temp=which(data_all_shifted$trialNo==1 & data_all_shifted$condition=='NT')
+    # locator_temp=which(data_all$group==unique(data_all$group[data_all$sub==i])& data_all_shifted$condition=='NT')
     data_all_shifted[locator_temp0,]$age_z = (data_all_shifted[locator_temp0,]$age-mean(data_all_shifted[locator_temp,]$age,na.rm = TRUE))/sd(data_all_shifted[locator_temp,]$age,na.rm=TRUE)
   }
+  
   if(saveCSV){
     write.csv(data_all_shifted,"data/collected/data_all_shifted.csv",row.names = FALSE)
   }
@@ -72,6 +77,7 @@ if(load_recoded && !(recodeMe || shiftMe)){
   data_all_shifted_recoded = read.table("data/collected/data_all_shifted_recoded.csv",sep=",",header=T)
 }
 save_outputs = TRUE;
+
 
 data_all_shifted_recoded$group=factor(data_all_shifted_recoded$group)
 data_all_shifted_recoded$cond_order=factor(data_all_shifted_recoded$cond_order)
@@ -164,7 +170,7 @@ if (save_outputs){
 
 
 # MB/MF scores ---------------------------------
-saveCSV_scores = TRUE
+saveCSV_scores = FALSE
 data_all_scores<-NULL
 subs = unique(data_all_shifted_recoded$sub)
 conditions = unique(data_all_shifted_recoded$condition)
