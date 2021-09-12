@@ -50,11 +50,17 @@ data_all$condition = relevel(data_all$condition, ref="NT")
 #   data_all[locator_temp0,]$aai_z = (ppt_qs_data[locator_temp,]$AAI-mean(ppt_qs_data$AAI,na.rm = TRUE))/sd(ppt_qs_data$AAI,na.rm=TRUE)
 #   data_all[locator_temp0,]$ocir_z = (ppt_qs_data[locator_temp,]$OCI_R-mean(ppt_qs_data$AAI,na.rm = TRUE))/sd(ppt_qs_data$OCI_R,na.rm=TRUE)
 # }
-
-
+# 
+# #Deltaw
 # data_delta_w$age_z = rep(0,dim(data_delta_w)[1])
+# data_delta_w$eat26_z = rep(0,dim(data_delta_w)[1])
+# data_delta_w$aai_z = rep(0,dim(data_delta_w)[1])
+# data_delta_w$ocir_z = rep(0,dim(data_delta_w)[1])
 # for (i in data_delta_w$sub){
 #   data_delta_w[data_delta_w$sub==i,]$age_z=unique(data_all[data_all$sub==i,]$age_z)
+#   data_delta_w[data_delta_w$sub==i,]$eat26_z=unique(data_all[data_all$sub==i,]$eat26_z)
+#   data_delta_w[data_delta_w$sub==i,]$aai_z=unique(data_all[data_all$sub==i,]$aai_z)
+#   data_delta_w[data_delta_w$sub==i,]$ocir_z=unique(data_all[data_all$sub==i,]$ocir_z)
 # }
 # 
 # data_delta_w$group=factor(data_delta_w$group)
@@ -115,11 +121,4 @@ if (save_outputs){
   sink()
 }
 
-# model_w_scores <- lmer(beta_1_MB~(eat26_z+ocir_z+aai_z+age_z)*condition+(1|sub),data=data_all)
-# summary(model_w_scores)
-# if (save_outputs){
-#   sink("model_summaries/model_w_summary.txt")
-#   print(summary(model_w))
-#   sink()
-# }
 

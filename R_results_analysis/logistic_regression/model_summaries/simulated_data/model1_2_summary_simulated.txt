@@ -7,37 +7,37 @@ Formula: stay ~ r * transition * (group + condition + age_z) + (r * transition +
 Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e+05))
 
      AIC      BIC   logLik deviance df.resid 
- 17963.6  18171.4  -8955.8  17911.6    21874 
+ 17963.5  18171.4  -8955.8  17911.5    21874 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--7.4358  0.2030  0.3076  0.4810  5.1682 
+-7.4373  0.2029  0.3077  0.4810  5.1730 
 
 Random effects:
  Groups Name         Variance Std.Dev. Corr             
- sub    (Intercept)  0.78383  0.8853                    
-        r            0.08594  0.2931   -0.01            
-        transition   0.01167  0.1080   -0.27 -0.63      
-        r:transition 0.02417  0.1555   -0.24 -0.19  0.80
+ sub    (Intercept)  0.78374  0.8853                    
+        r            0.08591  0.2931   -0.01            
+        transition   0.01163  0.1078   -0.26 -0.63      
+        r:transition 0.02416  0.1554   -0.24 -0.19  0.80
 Number of obs: 21900, groups:  sub, 73
 
 Fixed effects:
-                           Estimate Std. Error z value Pr(>|z|)    
-(Intercept)                1.938381   0.153337  12.641  < 2e-16 ***
-r                          0.552892   0.064014   8.637  < 2e-16 ***
-transition                 0.077921   0.044237   1.761  0.07816 .  
-groupED                   -0.317630   0.212662  -1.494  0.13528    
-conditionBID              -0.020919   0.042521  -0.492  0.62274    
-age_z                      0.142679   0.106463   1.340  0.18019    
-r:transition               0.206609   0.048220   4.285 1.83e-05 ***
-r:groupED                 -0.093241   0.083265  -1.120  0.26279    
-r:conditionBID             0.068739   0.042536   1.616  0.10609    
-r:age_z                    0.007663   0.041939   0.183  0.85501    
-transition:groupED        -0.086442   0.051397  -1.682  0.09260 .  
-transition:conditionBID   -0.072043   0.042574  -1.692  0.09061 .  
-transition:age_z          -0.035652   0.026165  -1.363  0.17302    
-r:transition:groupED      -0.181693   0.058146  -3.125  0.00178 ** 
-r:transition:conditionBID -0.092406   0.042562  -2.171  0.02992 *  
-r:transition:age_z        -0.025774   0.029525  -0.873  0.38269    
+                          Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                2.00826    0.16207  12.391  < 2e-16 ***
+r                          0.55760    0.06785   8.218  < 2e-16 ***
+transition                 0.06014    0.04687   1.283 0.199440    
+groupED                   -0.45548    0.23589  -1.931 0.053498 .  
+conditionBID              -0.02091    0.04253  -0.492 0.622944    
+age_z                      0.16028    0.11889   1.348 0.177619    
+r:transition               0.19376    0.05115   3.788 0.000152 ***
+r:groupED                 -0.10245    0.09252  -1.107 0.268172    
+r:conditionBID             0.06874    0.04254   1.616 0.106107    
+r:age_z                    0.01069    0.04686   0.228 0.819579    
+transition:groupED        -0.05139    0.05736  -0.896 0.370353    
+transition:conditionBID   -0.07205    0.04258  -1.692 0.090627 .  
+transition:age_z          -0.04067    0.02925  -1.391 0.164320    
+r:transition:groupED      -0.15636    0.06484  -2.411 0.015891 *  
+r:transition:conditionBID -0.09241    0.04257  -2.171 0.029935 *  
+r:transition:age_z        -0.02939    0.03301  -0.891 0.373188    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1

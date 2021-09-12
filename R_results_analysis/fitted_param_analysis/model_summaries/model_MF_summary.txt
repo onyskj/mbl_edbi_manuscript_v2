@@ -1,32 +1,32 @@
-Linear mixed model fit by REML. t-tests use Satterthwaite's method [lmerModLmerTest]
+Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmerTest']
 Formula: beta_1_MF ~ group * condition + age_z + (1 | sub)
    Data: data_all
 
-REML criterion at convergence: 371.9
+REML criterion at convergence: 371.7
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--2.1521 -0.4909 -0.1411  0.4165  2.8645 
+-2.1511 -0.4931 -0.1410  0.4183  2.8644 
 
 Random effects:
  Groups   Name        Variance Std.Dev.
- sub      (Intercept) 0.3588   0.5990  
+ sub      (Intercept) 0.3587   0.5989  
  Residual             0.4422   0.6649  
 Number of obs: 146, groups:  sub, 73
 
 Fixed effects:
-                      Estimate Std. Error        df t value Pr(>|t|)    
-(Intercept)            1.74582    0.14916 116.81134  11.704  < 2e-16 ***
-groupED               -0.78549    0.20951 116.81134  -3.749 0.000277 ***
-conditionBID          -0.36185    0.15673  71.00000  -2.309 0.023872 *  
-age_z                  0.01475    0.09037  70.00000   0.163 0.870858    
-groupED:conditionBID   0.47481    0.22015  71.00000   2.157 0.034407 *  
+                     Estimate Std. Error       df t value Pr(>|t|)    
+(Intercept)            1.7545     0.1553 112.9903  11.297  < 2e-16 ***
+groupED               -0.8026     0.2262 109.7426  -3.547 0.000574 ***
+conditionBID          -0.3619     0.1567  71.0000  -2.309 0.023872 *  
+age_z                  0.0199     0.0995  70.0000   0.200 0.842048    
+groupED:conditionBID   0.4748     0.2202  71.0000   2.157 0.034407 *  
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 Correlation of Fixed Effects:
             (Intr) gropED cndBID age_z 
-groupED     -0.712                     
-conditinBID -0.525  0.374              
-age_z        0.000  0.000  0.000       
-grpED:cnBID  0.374 -0.525 -0.712  0.000
+groupED     -0.738                     
+conditinBID -0.505  0.346              
+age_z        0.279 -0.378  0.000       
+grpED:cnBID  0.359 -0.487 -0.712  0.000

@@ -1,8 +1,7 @@
 Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) [
 glmerMod]
  Family: binomial  ( logit )
-Formula: stay ~ r * transition * (group * condition) + (r * transition +  
-    1 | sub)
+Formula: stay ~ r * transition * (group * condition) + (r * transition +      1 | sub)
    Data: data_all_shifted_recoded
 Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e+05))
 

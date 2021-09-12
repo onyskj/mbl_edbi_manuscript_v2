@@ -11,37 +11,37 @@ Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e+05))
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--7.3016  0.2049  0.3078  0.4761  5.3325 
+-7.3030  0.2044  0.3078  0.4760  5.3375 
 
 Random effects:
  Groups Name         Variance Std.Dev. Corr             
- sub    (Intercept)  0.78417  0.8855                    
-        r            0.08594  0.2932   -0.01            
-        transition   0.01145  0.1070   -0.27 -0.65      
-        r:transition 0.02434  0.1560   -0.24 -0.19  0.81
+ sub    (Intercept)  0.78408  0.8855                    
+        r            0.08591  0.2931   -0.01            
+        transition   0.01140  0.1068   -0.27 -0.65      
+        r:transition 0.02433  0.1560   -0.24 -0.19  0.81
 Number of obs: 21900, groups:  sub, 73
 
 Fixed effects:
                                    Estimate Std. Error z value Pr(>|z|)    
-(Intercept)                        1.966898   0.155090  12.682  < 2e-16 ***
-r                                  0.502026   0.068045   7.378 1.61e-13 ***
-transition                         0.044697   0.049818   0.897 0.369607    
-groupED                           -0.375292   0.216875  -1.730 0.083550 .  
-conditionBID                      -0.074923   0.062122  -1.206 0.227795    
-age_z                              0.142238   0.106495   1.336 0.181671    
-r:transition                       0.179841   0.053513   3.361 0.000778 ***
-groupED:conditionBID               0.114810   0.085511   1.343 0.179393    
-r:groupED                         -0.001170   0.093224  -0.013 0.989988    
-r:conditionBID                     0.166701   0.062123   2.683 0.007288 ** 
-r:age_z                            0.007644   0.041943   0.182 0.855389    
-transition:groupED                -0.028436   0.066250  -0.429 0.667760    
-transition:conditionBID           -0.004224   0.062191  -0.068 0.945846    
-transition:age_z                  -0.035405   0.026107  -1.356 0.175040    
-r:groupED:conditionBID            -0.175570   0.085521  -2.053 0.040077 *  
-transition:groupED:conditionBID   -0.120517   0.085611  -1.408 0.159211    
-r:transition:groupED              -0.133018   0.071813  -1.852 0.063987 .  
-r:transition:conditionBID         -0.037552   0.062154  -0.604 0.545727    
-r:transition:age_z                -0.026093   0.029574  -0.882 0.377612    
-r:transition:groupED:conditionBID -0.097991   0.085565  -1.145 0.252121    
+(Intercept)                        2.036491   0.163698  12.441  < 2e-16 ***
+r                                  0.506723   0.071649   7.072 1.52e-12 ***
+transition                         0.027029   0.052152   0.518  0.60427    
+groupED                           -0.512567   0.239665  -2.139  0.03246 *  
+conditionBID                      -0.074913   0.062119  -1.206  0.22783    
+age_z                              0.159828   0.118909   1.344  0.17891    
+r:transition                       0.166832   0.056153   2.971  0.00297 ** 
+groupED:conditionBID               0.114796   0.085509   1.343  0.17943    
+r:groupED                         -0.010362   0.101553  -0.102  0.91873    
+r:conditionBID                     0.166706   0.062127   2.683  0.00729 ** 
+r:age_z                            0.010676   0.046860   0.228  0.81978    
+transition:groupED                 0.006382   0.070943   0.090  0.92832    
+transition:conditionBID           -0.004228   0.062197  -0.068  0.94581    
+transition:age_z                  -0.040408   0.029179  -1.385  0.16610    
+r:groupED:conditionBID            -0.175575   0.085525  -2.053  0.04008 *  
+transition:groupED:conditionBID   -0.120511   0.085618  -1.408  0.15926    
+r:transition:groupED              -0.107371   0.077319  -1.389  0.16493    
+r:transition:conditionBID         -0.037549   0.062159  -0.604  0.54579    
+r:transition:age_z                -0.029757   0.033061  -0.900  0.36809    
+r:transition:groupED:conditionBID -0.097998   0.085571  -1.145  0.25211    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
