@@ -435,7 +435,8 @@ sgtitle('Stay probabilities for Neutral and BID condition in simulated data','fo
 fname_df = 'figures/2/stay_prob_plots_simulated';
 % export_fig(fname_df,'-pdf', '-m1', '-transparent')
 
-%% MB score - collected data
+%% MB score - collected and simulated data
+%MB score - collected 
 data_all_scores.group =  categorical(data_all_scores.group);
 data_all_scores.condition =  categorical(data_all_scores.condition);
 data_all_scores.cond_order =  categorical(data_all_scores.cond_order);
@@ -461,7 +462,7 @@ end
 % MB score collected
 close all
 axisFontSize=30;
-% subplot(1,2,1)
+subplot(1,2,1)
 y=[data_all_mb_scores_summary{3}(1,1), data_all_mb_scores_summary{1}(1,1);data_all_mb_scores_summary{4}(1,1),data_all_mb_scores_summary{2}(1,1)];
 errors = [data_all_mb_scores_summary{3}(1,3), data_all_mb_scores_summary{1}(1,3);data_all_mb_scores_summary{4}(1,3),data_all_mb_scores_summary{2}(1,3)];
 colors_cond = {"#b3ffff", ' #ffc61a'};
@@ -486,9 +487,10 @@ for i = 1:nbars
     plot(xx(2)', y(2,i),'s','markersize',7,'color','k','MarkerFaceColor','k')
 end
 xticklabels({'Neutral','BID'})
-legend('HC','ED','location','north')
+legend('HC','ED','location','north','FontSize',axisFontSize+10)
 yticks(linspace(0, 0.2,5))
-% ylim([0 max(y,[],'all')+max(errors,[],'all')*4/3])
+% ylim([-0.05 max(y,[],'all')+max(errors,[],'all')*4/3])
+ylim([-0.05 0.2])
 axis square
 set(gca,'fontsize',axisFontSize,'Box','off','TickDir','out','TickLength'...
         ,[.0175 .0175],'XMinorTick'  , 'off','YMinorTick','on','YGrid','off',...
@@ -496,10 +498,10 @@ set(gca,'fontsize',axisFontSize,'Box','off','TickDir','out','TickLength'...
 
 set(gcf,'units','normalized','outerposition',[0 0 1 1]);
 % sgtitle('Stay probabilities for Neutral and BID condition in collected data','fontsize',38)
-fname_df = 'figures/mb_scores_collected_plots';
+% fname_df = 'figures/2/mb_scores_collected_plots';
 % export_fig(fname_df,'-pdf', '-m1', '-transparent')
 
-%% MB score - simulated data
+% MB score - simulated data
 data_all_scores_simulated.group =  categorical(data_all_scores_simulated.group);
 data_all_scores_simulated.condition =  categorical(data_all_scores_simulated.condition);
 data_all_scores_simulated.cond_order =  categorical(data_all_scores_simulated.cond_order);
@@ -521,9 +523,9 @@ for i=1:size(data_all_mb_scores_simulated_summary,1)
 end
 
 % MB score simulated
-close all
+% close all
 axisFontSize=30;
-% subplot(1,2,1)
+subplot(1,2,2)
 y=[data_all_mb_scores_simulated_summary{3}(1,1), data_all_mb_scores_simulated_summary{1}(1,1);data_all_mb_scores_simulated_summary{4}(1,1),data_all_mb_scores_simulated_summary{2}(1,1)];
 errors = [data_all_mb_scores_simulated_summary{3}(1,3), data_all_mb_scores_simulated_summary{1}(1,3);data_all_mb_scores_simulated_summary{4}(1,3),data_all_mb_scores_simulated_summary{2}(1,3)];
 colors_cond = {"#999966", ' #c6538c'};
@@ -548,9 +550,10 @@ for i = 1:nbars
     plot(xx(2)', y(2,i),'s','markersize',7,'color','k','MarkerFaceColor','k')
 end
 xticklabels({'Neutral','BID'})
-legend('HC','ED','location','north')
+legend('HC','ED','location','north','FontSize',axisFontSize+10)
 yticks(linspace(-0.1, 0.2,7))
-ylim([-0.05 max(y,[],'all')+max(errors,[],'all')*4/3])
+% ylim([-0.05 max(y,[],'all')+max(errors,[],'all')*4/3])
+ylim([-0.05 0.2])
 axis square
 set(gca,'fontsize',axisFontSize,'Box','off','TickDir','out','TickLength'...
         ,[.0175 .0175],'XMinorTick'  , 'off','YMinorTick','on','YGrid','off',...
@@ -558,5 +561,5 @@ set(gca,'fontsize',axisFontSize,'Box','off','TickDir','out','TickLength'...
 
 set(gcf,'units','normalized','outerposition',[0 0 1 1]);
 % sgtitle('Stay probabilities for Neutral and BID condition in collected data','fontsize',38)
-fname_df = 'figures/2/mb_scores_simulated_plots';
+fname_df = 'figures/2/mb_scores_colleceted_simulated_plots';
 % export_fig(fname_df,'-pdf', '-m1', '-transparent')
