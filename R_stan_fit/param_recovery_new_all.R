@@ -37,8 +37,7 @@ model_par_names=c("beta_1_MB","beta_1_MF","beta_2","alpha", "pers")
 #                         'fitted_ind_params_summary_2021_09_09_05_00_16_niter_4000_HC_NT_foerde_alter_JO_wrong_ship.csv',
 #                         'fitted_ind_params_summary_2021_09_09_06_38_21_niter_4000_HC_BID_foerde_alter_JO_wrong_ship.csv')
 
-param_sum_filenames = c('fitted_ind_params_summary_2021_09_09_02_06_39_niter_4000_ED_NT_foerde_alter_JO_wrong_ship.csv',
-                        'fitted_ind_params_summary_2021_09_09_03_35_02_niter_4000_ED_BID_foerde_alter_JO_wrong_ship.csv',
+param_sum_filenames = c('fitted_ind_params_summary_2021_09_09_03_35_02_niter_4000_ED_BID_foerde_alter_JO_wrong_ship.csv',
                         'fitted_ind_params_summary_2021_09_09_06_38_21_niter_4000_HC_BID_foerde_alter_JO_wrong_ship.csv')
 
 for (f in 1:length(param_sum_filenames)){

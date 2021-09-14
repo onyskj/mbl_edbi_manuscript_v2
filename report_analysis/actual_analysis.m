@@ -434,3 +434,129 @@ set(gcf,'units','normalized','outerposition',[0 0 1 1]);
 sgtitle('Stay probabilities for Neutral and BID condition in simulated data','fontsize',38)
 fname_df = 'figures/stay_prob_plots_simulated';
 % export_fig(fname_df,'-pdf', '-m1', '-transparent')
+
+%% MB score - collected data
+data_all_scores.group =  categorical(data_all_scores.group);
+data_all_scores.condition =  categorical(data_all_scores.condition);
+data_all_scores.cond_order =  categorical(data_all_scores.cond_order);
+
+data_all_scores_nt_ed = data_all_scores(data_all_scores.group=='ED' & data_all_scores.condition=='NT',:);
+data_all_scores_tr_ed = data_all_scores(data_all_scores.group=='ED' & data_all_scores.condition=='BID',:);
+data_all_scores_nt_hc = data_all_scores(data_all_scores.group=='HC' & data_all_scores.condition=='NT',:);
+data_all_scores_tr_hc = data_all_scores(data_all_scores.group=='HC' & data_all_scores.condition=='BID',:);
+
+data_all_scores_all = {data_all_scores_nt_ed,data_all_scores_tr_ed,data_all_scores_nt_hc,data_all_scores_tr_hc};
+
+
+data_all_mb_scores_summary = cell(4,1); %gr_cond x mbscore (mean, std, std/sqrtN)
+for i=1:size(data_all_mb_scores_summary,1)
+    for j=1:1
+        data_all_mb_scores_summary{i,j} = [nanmean(data_all_scores_all{i}{:,13}),...
+            nanstd(data_all_scores_all{i}{:,13}),...
+            nanstd(data_all_scores_all{i}{:,13})/sqrt(length(data_all_scores_all{i}{:,13}))];
+    end
+end
+
+
+% MB score collected
+close all
+axisFontSize=30;
+% subplot(1,2,1)
+y=[data_all_mb_scores_summary{3}(1,1), data_all_mb_scores_summary{1}(1,1);data_all_mb_scores_summary{4}(1,1),data_all_mb_scores_summary{2}(1,1)];
+errors = [data_all_mb_scores_summary{3}(1,3), data_all_mb_scores_summary{1}(1,3);data_all_mb_scores_summary{4}(1,3),data_all_mb_scores_summary{2}(1,3)];
+colors_cond = {"#b3ffff", ' #ffc61a'};
+b=bar(y,'grouped');
+b(1).FaceColor=colors_cond{1};
+b(2).FaceColor=colors_cond{2};
+hold on
+ylabel('MB score')
+title('MB score - collected data')
+ngroups = size(y,1);
+nbars = size(y,2);
+groupwidth = min(0.8, nbars/(nbars + 1.5));
+for i = 1:nbars
+    hold on;
+    xx = (1:ngroups) - groupwidth/2 + (2*i-1) * groupwidth / (2*nbars);
+    errorbar(xx(1)', y(1,i), errors(1,i), 'k', 'linestyle', 'none','linewidth',4);
+    hold on;
+    plot(xx(1)', y(1,i),'s','markersize',7,'color','k','MarkerFaceColor','k')
+    hold on;
+    errorbar(xx(2)', y(2,i), errors(2,i), 'k', 'linestyle', 'none','linewidth',4);
+    hold on;
+    plot(xx(2)', y(2,i),'s','markersize',7,'color','k','MarkerFaceColor','k')
+end
+xticklabels({'Neutral','BID'})
+legend('HC','ED','location','north')
+yticks(linspace(0, 0.2,5))
+% ylim([0 max(y,[],'all')+max(errors,[],'all')*4/3])
+axis square
+set(gca,'fontsize',axisFontSize,'Box','off','TickDir','out','TickLength'...
+        ,[.0175 .0175],'XMinorTick'  , 'off','YMinorTick','on','YGrid','off',...
+        'XColor',[.3 .3 .3],'YColor',[.3 .3 .3],'LineWidth',2,'FontName','Helvetica','XDir', 'default');
+
+set(gcf,'units','normalized','outerposition',[0 0 1 1]);
+% sgtitle('Stay probabilities for Neutral and BID condition in collected data','fontsize',38)
+fname_df = 'figures/mb_scores_collected_plots';
+% export_fig(fname_df,'-pdf', '-m1', '-transparent')
+
+%% MB score - simulated data
+data_all_scores_simulated.group =  categorical(data_all_scores_simulated.group);
+data_all_scores_simulated.condition =  categorical(data_all_scores_simulated.condition);
+data_all_scores_simulated.cond_order =  categorical(data_all_scores_simulated.cond_order);
+
+data_all_scores_simulated_nt_ed = data_all_scores_simulated(data_all_scores_simulated.group=='ED' & data_all_scores_simulated.condition=='NT',:);
+data_all_scores_simulated_tr_ed = data_all_scores_simulated(data_all_scores_simulated.group=='ED' & data_all_scores_simulated.condition=='BID',:);
+data_all_scores_simulated_nt_hc = data_all_scores_simulated(data_all_scores_simulated.group=='HC' & data_all_scores_simulated.condition=='NT',:);
+data_all_scores_simulated_tr_hc = data_all_scores_simulated(data_all_scores_simulated.group=='HC' & data_all_scores_simulated.condition=='BID',:);
+
+data_all_scores_simulated_all = {data_all_scores_simulated_nt_ed,data_all_scores_simulated_tr_ed,data_all_scores_simulated_nt_hc,data_all_scores_simulated_tr_hc};
+
+data_all_mb_scores_simulated_summary = cell(4,1); %gr_cond x mbscore (mean, std, std/sqrtN)
+for i=1:size(data_all_mb_scores_simulated_summary,1)
+    for j=1:1
+        data_all_mb_scores_simulated_summary{i,j} = [nanmean(data_all_scores_simulated_all{i}{:,13}),...
+            nanstd(data_all_scores_simulated_all{i}{:,13}),...
+            nanstd(data_all_scores_simulated_all{i}{:,13})/sqrt(length(data_all_scores_simulated_all{i}{:,13}))];
+    end
+end
+
+% MB score simulated
+close all
+axisFontSize=30;
+% subplot(1,2,1)
+y=[data_all_mb_scores_simulated_summary{3}(1,1), data_all_mb_scores_simulated_summary{1}(1,1);data_all_mb_scores_simulated_summary{4}(1,1),data_all_mb_scores_simulated_summary{2}(1,1)];
+errors = [data_all_mb_scores_simulated_summary{3}(1,3), data_all_mb_scores_simulated_summary{1}(1,3);data_all_mb_scores_simulated_summary{4}(1,3),data_all_mb_scores_simulated_summary{2}(1,3)];
+colors_cond = {"#999966", ' #c6538c'};
+b=bar(y,'grouped');
+b(1).FaceColor=colors_cond{1};
+b(2).FaceColor=colors_cond{2};
+hold on
+ylabel('MB score')
+title('MB score - simulated data')
+ngroups = size(y,1);
+nbars = size(y,2);
+groupwidth = min(0.8, nbars/(nbars + 1.5));
+for i = 1:nbars
+    hold on;
+    xx = (1:ngroups) - groupwidth/2 + (2*i-1) * groupwidth / (2*nbars);
+    errorbar(xx(1)', y(1,i), errors(1,i), 'k', 'linestyle', 'none','linewidth',4);
+    hold on;
+    plot(xx(1)', y(1,i),'s','markersize',7,'color','k','MarkerFaceColor','k')
+    hold on;
+    errorbar(xx(2)', y(2,i), errors(2,i), 'k', 'linestyle', 'none','linewidth',4);
+    hold on;
+    plot(xx(2)', y(2,i),'s','markersize',7,'color','k','MarkerFaceColor','k')
+end
+xticklabels({'Neutral','BID'})
+legend('HC','ED','location','north')
+yticks(linspace(-0.1, 0.2,7))
+ylim([-0.05 max(y,[],'all')+max(errors,[],'all')*4/3])
+axis square
+set(gca,'fontsize',axisFontSize,'Box','off','TickDir','out','TickLength'...
+        ,[.0175 .0175],'XMinorTick'  , 'off','YMinorTick','on','YGrid','off',...
+        'XColor',[.3 .3 .3],'YColor',[.3 .3 .3],'LineWidth',2,'FontName','Helvetica','XDir', 'default');
+
+set(gcf,'units','normalized','outerposition',[0 0 1 1]);
+% sgtitle('Stay probabilities for Neutral and BID condition in collected data','fontsize',38)
+fname_df = 'figures/mb_scores_simulated_plots';
+% export_fig(fname_df,'-pdf', '-m1', '-transparent')

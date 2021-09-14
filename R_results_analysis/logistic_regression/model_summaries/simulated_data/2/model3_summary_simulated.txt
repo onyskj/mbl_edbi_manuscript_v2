@@ -1,0 +1,46 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: stay ~ r * transition * (group) + (r * transition + 1 | sub)
+   Data: data_all_shifted_recoded
+Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e+05))
+
+     AIC      BIC   logLik deviance df.resid 
+ 18005.2  18149.1  -8984.6  17969.2    21882 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-8.3686  0.2108  0.3118  0.4735  4.0916 
+
+Random effects:
+ Groups Name         Variance Std.Dev. Corr             
+ sub    (Intercept)  0.778706 0.88244                   
+        r            0.088367 0.29727   0.02            
+        transition   0.007663 0.08754  -0.33 -0.11      
+        r:transition 0.003326 0.05767  -0.76 -0.15  0.86
+Number of obs: 21900, groups:  sub, 73
+
+Fixed effects:
+                     Estimate Std. Error z value Pr(>|z|)    
+(Intercept)           1.98566    0.15163  13.095   <2e-16 ***
+r                     0.63166    0.06182  10.218   <2e-16 ***
+transition           -0.06278    0.03803  -1.651   0.0988 .  
+groupED              -0.46004    0.21196  -2.170   0.0300 *  
+r:transition          0.11079    0.03635   3.048   0.0023 ** 
+r:groupED            -0.18351    0.08413  -2.181   0.0292 *  
+transition:groupED    0.05241    0.04894   1.071   0.2842    
+r:transition:groupED -0.10383    0.04634  -2.240   0.0251 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) r      trnstn gropED r:trns r:grED trn:ED
+r            0.055                                          
+transition  -0.215 -0.082                                   
+groupED     -0.714 -0.038  0.150                            
+r:transitin -0.214 -0.267  0.324  0.151                     
+r:groupED   -0.039 -0.726  0.055  0.048  0.184              
+trnstn:grED  0.162  0.058 -0.736 -0.215 -0.234 -0.080       
+r:trnstn:ED  0.165  0.196 -0.236 -0.233 -0.739 -0.246  0.310
+convergence code: 0
+boundary (singular) fit: see ?isSingular
+

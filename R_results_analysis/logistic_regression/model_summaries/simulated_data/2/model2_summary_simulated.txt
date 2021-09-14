@@ -1,0 +1,41 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: stay ~ r * transition * (group * condition) + (r * transition +      1 | sub)
+   Data: data_all_shifted_recoded
+Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e+05))
+
+     AIC      BIC   logLik deviance df.resid 
+ 18007.3  18215.1  -8977.6  17955.3    21874 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-8.4872  0.2101  0.3103  0.4765  4.2689 
+
+Random effects:
+ Groups Name         Variance Std.Dev. Corr             
+ sub    (Intercept)  0.779645 0.88298                   
+        r            0.088318 0.29718   0.02            
+        transition   0.007543 0.08685  -0.33 -0.10      
+        r:transition 0.003500 0.05916  -0.72 -0.16  0.83
+Number of obs: 21900, groups:  sub, 73
+
+Fixed effects:
+                                   Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                        2.061228   0.155808  13.229   <2e-16 ***
+r                                  0.603796   0.070713   8.539   <2e-16 ***
+transition                        -0.091973   0.051238  -1.795   0.0727 .  
+groupED                           -0.471672   0.217026  -2.173   0.0298 *  
+conditionBID                      -0.142336   0.064937  -2.192   0.0284 *  
+r:transition                       0.117397   0.050082   2.344   0.0191 *  
+groupED:conditionBID               0.014834   0.086490   0.172   0.8638    
+r:groupED                         -0.144560   0.095415  -1.515   0.1298    
+r:conditionBID                     0.046082   0.064957   0.709   0.4781    
+transition:groupED                 0.094486   0.066460   1.422   0.1551    
+transition:conditionBID            0.053205   0.065007   0.818   0.4131    
+r:groupED:conditionBID            -0.074525   0.086512  -0.861   0.3890    
+transition:groupED:conditionBID   -0.074714   0.086552  -0.863   0.3880    
+r:transition:groupED              -0.126609   0.064708  -1.957   0.0504 .  
+r:transition:conditionBID         -0.009277   0.065032  -0.143   0.8866    
+r:transition:groupED:conditionBID  0.043512   0.086568   0.503   0.6152    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1

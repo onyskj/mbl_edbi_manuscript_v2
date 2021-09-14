@@ -1,0 +1,43 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: stay ~ r * transition * (age_z) + (r * transition + 1 | sub)
+   Data: data_all_shifted_recoded
+Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e+05))
+
+     AIC      BIC   logLik deviance df.resid 
+ 18019.4  18163.3  -8991.7  17983.4    21882 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-7.7327  0.2127  0.3077  0.4670  4.1621 
+
+Random effects:
+ Groups Name         Variance Std.Dev. Corr             
+ sub    (Intercept)  0.823335 0.90738                   
+        r            0.093335 0.30551   0.10            
+        transition   0.006755 0.08219  -0.44 -0.16      
+        r:transition 0.006732 0.08205  -0.39  0.10  0.59
+Number of obs: 21900, groups:  sub, 73
+
+Fixed effects:
+                   Estimate Std. Error z value Pr(>|z|)    
+(Intercept)         1.75077    0.10900  16.062   <2e-16 ***
+r                   0.53771    0.04330  12.419   <2e-16 ***
+transition         -0.03288    0.02565  -1.282   0.2000    
+age_z               0.05289    0.10967   0.482   0.6296    
+r:transition        0.05479    0.02565   2.136   0.0327 *  
+r:age_z            -0.05942    0.04330  -1.372   0.1699    
+transition:age_z    0.02766    0.02447   1.130   0.2583    
+r:transition:age_z -0.02185    0.02449  -0.892   0.3722    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) r      trnstn age_z  r:trns r:ag_z trns:_
+r            0.113                                          
+transition  -0.246 -0.105                                   
+age_z        0.005  0.000 -0.002                            
+r:transitin -0.164 -0.181  0.309 -0.002                     
+r:age_z      0.000  0.024 -0.003  0.106 -0.004              
+transtn:g_z -0.003 -0.005  0.043 -0.248  0.007 -0.091       
+r:trnstn:g_ -0.003 -0.005  0.007 -0.165  0.044 -0.158  0.271
