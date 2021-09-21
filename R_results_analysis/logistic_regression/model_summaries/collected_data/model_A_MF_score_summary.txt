@@ -1,0 +1,32 @@
+Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmerTest']
+Formula: mf_score ~ group * condition + age_z + (1 | sub)
+   Data: data_all_scores
+
+REML criterion at convergence: 31.2
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-1.84116 -0.47051 -0.04768  0.46087  2.09466 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ sub      (Intercept) 0.06923  0.2631  
+ Residual             0.02570  0.1603  
+Number of obs: 134, groups:  sub, 67
+
+Fixed effects:
+                      Estimate Std. Error        df t value Pr(>|t|)    
+(Intercept)           0.284049   0.057124 81.639702   4.972 3.59e-06 ***
+groupED              -0.023363   0.082254 80.162376  -0.284    0.777    
+conditionBID          0.021953   0.040078 65.000002   0.548    0.586    
+age_z                -0.040143   0.038973 63.999995  -1.030    0.307    
+groupED:conditionBID  0.005554   0.055452 65.000002   0.100    0.921    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) gropED cndBID age_z 
+groupED     -0.752                     
+conditinBID -0.351  0.244              
+age_z        0.301 -0.401  0.000       
+grpED:cnBID  0.254 -0.337 -0.723  0.000

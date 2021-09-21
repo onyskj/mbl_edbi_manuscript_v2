@@ -1,6 +1,6 @@
 %% Initialise (with rho for statistial test)
 clear all; close all; clc
-addpath('fitted_data','simulated_data','export/','data/','tables/','figures/','xpdf_tools-master/');
+addpath('fitted_data','simulated_data','export/','data/','tables/','figures/');
 
 results_nt_ed = readtable("fitted_data/fitted_ind_params_df_2021_09_20_21_21_24_ED_NT_niter_4000_foerde_alter_2_JO_wrong_ship_newexc.csv");
 results_tr_ed = readtable("fitted_data/fitted_ind_params_df_2021_09_20_23_09_38_ED_BID_niter_4000_foerde_alter_2_JO_wrong_ship_newexc.csv");
@@ -44,6 +44,7 @@ subject_info_groups={subject_info(contains(subject_info.group,'HC'),:),subject_i
 qs_scores_groups={qs_scores(contains(qs_scores.group,'HC'),:),qs_scores(contains(qs_scores.group,'ED'),:)};
 
 nIDs = 10; alphabet = ('A':'Z').';chars = num2cell(alphabet(1:nIDs));chars = chars.';charlbl = strcat('',chars,''); % {'(a)','(b)','(c)','(d)'}
+
 %% Summarise the fits
 param_names = {'beta_mb','beta_mf','beta_2','alpha','pers','w'};
 results_info = cell(1,4); %%(beta_mb,beta_mf,beta_2,alpha,pers,w)x(mean,std,SE) for each group_condition
@@ -505,7 +506,7 @@ xticklabels({'Neutral','BID'})
 legend('HC','ED','location','north','FontSize',axisFontSize+10)
 yticks(linspace(-0.1, 0.2,7))
 % ylim([-0.05 max(y,[],'all')+max(errors,[],'all')*4/3])
-ylim([-0.075 0.2])
+ylim([-0.025 0.2])
 axis square
 text(-0.25,1.05,charlbl{1},'Units','normalized','FontSize',axisFontSize+5,'FontWeight','bold')
 set(gca,'fontsize',axisFontSize,'Box','off','TickDir','out','TickLength'...
@@ -569,7 +570,7 @@ xticklabels({'Neutral','BID'})
 legend('HC','ED','location','north','FontSize',axisFontSize+10)
 yticks(linspace(-0.1, 0.2,7))
 % ylim([-0.05 max(y,[],'all')+max(errors,[],'all')*4/3])
-ylim([-0.075 0.2])
+ylim([-0.025 0.2])
 text(-0.25,1.05,charlbl{2},'Units','normalized','FontSize',axisFontSize+5,'FontWeight','bold')
 axis square
 set(gca,'fontsize',axisFontSize,'Box','off','TickDir','out','TickLength'...

@@ -1,0 +1,38 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: stay ~ r * transition + (r * transition + 1 | sub)
+   Data: data_all_shifted_recoded
+Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e+05))
+
+     AIC      BIC   logLik deviance df.resid 
+ 17650.8  17761.6  -8811.4  17622.8    20086 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-6.8753  0.2407  0.3558  0.4897  4.5385 
+
+Random effects:
+ Groups Name           Variance Std.Dev. Corr             
+ sub    (Intercept)    0.84843  0.9211                    
+        r1             0.46766  0.6839   -0.37            
+        transition1    0.07258  0.2694   -0.55  0.69      
+        r1:transition1 0.45508  0.6746    0.23 -0.50 -0.92
+Number of obs: 20100, groups:  sub, 67
+
+Fixed effects:
+               Estimate Std. Error z value Pr(>|z|)    
+(Intercept)      1.3494     0.1234  10.938  < 2e-16 ***
+r1               0.5973     0.1150   5.195 2.05e-07 ***
+transition1     -0.2282     0.0674  -3.386  0.00071 ***
+r1:transition1   0.3677     0.1246   2.952  0.00316 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) r1     trnst1
+r1          -0.427              
+transition1 -0.547  0.575       
+r1:transtn1  0.303 -0.671 -0.717
+convergence code: 0
+boundary (singular) fit: see ?isSingular
+

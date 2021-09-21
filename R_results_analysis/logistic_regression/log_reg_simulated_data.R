@@ -84,7 +84,7 @@ data_all_shifted_recoded$cond_order = relevel(data_all_shifted_recoded$cond_orde
 data_all_shifted_recoded$condition = relevel(data_all_shifted_recoded$condition, ref="NT")
 
 
-save_outputs = FALSE;
+save_outputs = TRUE;
 if (fitModels){
   # Fit data ---------------------------------
   model1 <- glmer(stay~r*transition*(group+condition)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))

@@ -29,7 +29,7 @@ for (j in 1:length(thetas_winfo)){
   
   NS=dim(thetas)[1]
   
-  simulate_data <-dget(simulate_name)
+  simulate_data <-dget(simulate_name)  
   output = simulate_data(NT,NS,thetas)
   
   output_converted = NULL

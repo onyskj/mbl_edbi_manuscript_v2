@@ -1,0 +1,48 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: stay ~ r * transition * (group * condition + age_z) + (r * transition +      1 | sub)
+   Data: data_all_shifted_recoded
+Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e+05))
+
+     AIC      BIC   logLik deviance df.resid 
+ 17648.4  17885.7  -8794.2  17588.4    20070 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-7.6852  0.2287  0.3581  0.4955  4.6504 
+
+Random effects:
+ Groups Name           Variance Std.Dev. Corr             
+ sub    (Intercept)    0.83428  0.9134                    
+        r1             0.47292  0.6877   -0.39            
+        transition1    0.06365  0.2523   -0.55  0.79      
+        r1:transition1 0.35250  0.5937    0.22 -0.63 -0.92
+Number of obs: 20100, groups:  sub, 67
+
+Fixed effects:
+                                     Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                          1.639081   0.200787   8.163 3.26e-16 ***
+r1                                   0.520168   0.209499   2.483 0.013031 *  
+transition1                         -0.417937   0.130639  -3.199 0.001378 ** 
+groupED                             -0.355204   0.287773  -1.234 0.217084    
+conditionBID                        -0.273470   0.136606  -2.002 0.045297 *  
+age_z                                0.092779   0.136254   0.681 0.495916    
+r1:transition1                       0.823019   0.226841   3.628 0.000285 ***
+groupED:conditionBID                 0.144138   0.188969   0.763 0.445607    
+r1:groupED                           0.064131   0.291533   0.220 0.825887    
+r1:conditionBID                      0.261493   0.209865   1.246 0.212763    
+r1:age_z                             0.014782   0.126520   0.117 0.906993    
+transition1:groupED                  0.241131   0.183958   1.311 0.189928    
+transition1:conditionBID             0.122587   0.160284   0.765 0.444386    
+transition1:age_z                   -0.003542   0.072896  -0.049 0.961251    
+r1:groupED:conditionBID             -0.350516   0.286003  -1.226 0.220362    
+transition1:groupED:conditionBID    -0.019777   0.222737  -0.089 0.929248    
+r1:transition1:groupED              -0.773625   0.310637  -2.490 0.012758 *  
+r1:transition1:conditionBID         -0.221529   0.253428  -0.874 0.382047    
+r1:transition1:age_z                -0.056657   0.128747  -0.440 0.659889    
+r1:transition1:groupED:conditionBID  0.262924   0.342466   0.768 0.442643    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+convergence code: 0
+boundary (singular) fit: see ?isSingular
+

@@ -1,0 +1,43 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: stay ~ r * transition * (age_z) + (r * transition + 1 | sub)
+   Data: data_all_shifted_recoded
+Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e+05))
+
+     AIC      BIC   logLik deviance df.resid 
+ 16728.1  16870.4  -8346.1  16692.1    19960 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-6.4742  0.1793  0.3064  0.4934  4.2158 
+
+Random effects:
+ Groups Name           Variance Std.Dev. Corr             
+ sub    (Intercept)    1.4271   1.1946                    
+        r1             2.1882   1.4793   -0.50            
+        transition1    0.2751   0.5245   -0.76  0.68      
+        r1:transition1 2.3209   1.5234    0.51 -0.83 -0.90
+Number of obs: 19978, groups:  sub, 67
+
+Fixed effects:
+                     Estimate Std. Error z value Pr(>|z|)    
+(Intercept)           1.30815    0.15487   8.447  < 2e-16 ***
+r1                    0.86784    0.20171   4.302 1.69e-05 ***
+transition1          -0.35602    0.08740  -4.073 4.64e-05 ***
+age_z                 0.07572    0.15638   0.484  0.62823    
+r1:transition1        0.56357    0.21355   2.639  0.00832 ** 
+r1:age_z             -0.06880    0.20097  -0.342  0.73208    
+transition1:age_z     0.01586    0.08818   0.180  0.85731    
+r1:transition1:age_z -0.12685    0.21315  -0.595  0.55177    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) r1     trnst1 age_z  r1:tr1 r1:g_z trn1:_
+r1          -0.507                                          
+transition1 -0.718  0.599                                   
+age_z        0.015 -0.012 -0.021                            
+r1:transtn1  0.498 -0.830 -0.770  0.011                     
+r1:age_z    -0.013  0.016  0.018 -0.514 -0.015              
+trnstn1:g_z -0.020  0.019  0.041 -0.719 -0.022  0.603       
+r1:trnst1:_  0.011 -0.015 -0.022  0.503  0.017 -0.826 -0.778
