@@ -33,7 +33,7 @@ U=1-err;
 L2=0+err;
 U2=1000-err;
 
-NS = 35; #number of subjects
+NS = 38; #number of subjects
 NT = 150; #number of trials
 NP = 5; #number of parameters
 
