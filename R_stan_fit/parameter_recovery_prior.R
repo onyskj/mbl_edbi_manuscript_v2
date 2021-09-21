@@ -22,8 +22,8 @@ date.time.append <-dget("date_time_append.R")
 
 seed_num = 10;
 n_iter = 2000;
-seed_num = 2;
-n_iter = 5;
+# seed_num = 2;
+# n_iter = 5;
 save_outputs = TRUE
 
 seeds = sample(1:6000,size=seed_num);
@@ -42,13 +42,10 @@ simulate_name = 'simulate_data_foerde_alter_model.R';
 
 model_par_names=c("beta_1_MB","beta_1_MF","beta_2","alpha", "pers")
 
-param_sum_filenames = c('fitted_ind_params_summary_2021_09_20_21_21_24_niter_4000_ED_NT_foerde_alter_2_JO_wrong_ship_newexc.csv',
-                        'fitted_ind_params_summary_2021_09_20_23_09_38_niter_4000_ED_BID_foerde_alter_2_JO_wrong_ship_newexc.csv',
-                        'fitted_ind_params_summary_2021_09_21_00_51_49_niter_4000_HC_NT_foerde_alter_2_JO_wrong_ship_newexc.csv',
-                        'fitted_ind_params_summary_2021_09_21_02_17_29_niter_4000_HC_BID_foerde_alter_2_JO_wrong_ship_newexc.csv')
+param_sum_filenames = c('prior_params.csv')
 
 for (f in 1:length(param_sum_filenames)){
-  fitted_par_sum <- read.csv(paste("output/params/CSV/",param_sum_filenames[f],sep=''), header = T) 
+  fitted_par_sum <- read.csv(paste("output/params/CSV/prior/",param_sum_filenames[f],sep=''), header = T) 
   thetas <- matrix(0, ncol = NS, nrow = NP);
   
   fitted_par_sum$X<-NULL
@@ -103,9 +100,9 @@ for (f in 1:length(param_sum_filenames)){
     print(thetas_corr[seed,])
     
     if (save_outputs){
-      write.csv(simulated,file=paste("output/recovery/","recovery_sim_params_seed_",seeds[seed],'_','itern_',n_iter,'_',time_run,'_from',param_sum_filenames[f],'.csv',sep=''),row.names=FALSE)
-      write.csv(fitted,file=paste("output/recovery/","recovery_fit_params_seed_",seeds[seed],'_','itern_',n_iter,'_',time_run,'_from',param_sum_filenames[f],'.csv',sep=''),row.names=FALSE)
-      write.csv(thetas_corr[seed,],file=paste("output/recovery/","recovery_corr_seed_",seeds[seed],'_','itern_',n_iter,'_',time_run,'_from',param_sum_filenames[f],'.csv',sep=''),row.names=FALSE)
+      write.csv(simulated,file=paste("output/recovery/prior/","recovery_sim_params_seed_",seeds[seed],'_','itern_',n_iter,'_',time_run,'_from',param_sum_filenames[f],'.csv',sep=''),row.names=FALSE)
+      write.csv(fitted,file=paste("output/recovery/prior/","recovery_fit_params_seed_",seeds[seed],'_','itern_',n_iter,'_',time_run,'_from',param_sum_filenames[f],'.csv',sep=''),row.names=FALSE)
+      write.csv(thetas_corr[seed,],file=paste("output/recovery/prior/","recovery_corr_seed_",seeds[seed],'_','itern_',n_iter,'_',time_run,'_from',param_sum_filenames[f],'.csv',sep=''),row.names=FALSE)
     }
     
   }
@@ -117,8 +114,8 @@ for (f in 1:length(param_sum_filenames)){
   
   if (save_outputs){
     time_saved=date.time.append('');
-    write.csv(thetas_corr,file=paste("output/recovery/","recovery_corr_all_",time_saved,'_seedn_',seed_num,'itern_',n_iter,'_from',param_sum_filenames[f],'.csv',sep=''),row.names=FALSE)
-    write.csv(theta_corr_summary,file=paste("output/recovery/","recovery_corr_summary",time_saved,'_seedn_',seed_num,'itern_',n_iter,'_from',param_sum_filenames[f],'.csv',sep=''),row.names=FALSE)
+    write.csv(thetas_corr,file=paste("output/recovery/prior/","recovery_corr_all_",time_saved,'_seedn_',seed_num,'itern_',n_iter,'_from',param_sum_filenames[f],'.csv',sep=''),row.names=FALSE)
+    write.csv(theta_corr_summary,file=paste("output/recovery/prior/","recovery_corr_summary",time_saved,'_seedn_',seed_num,'itern_',n_iter,'_from',param_sum_filenames[f],'.csv',sep=''),row.names=FALSE)
   }
   
   print(paste('correlations for: ',param_sum_filenames[f],sep=''))
