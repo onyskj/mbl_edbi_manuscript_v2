@@ -2,31 +2,31 @@ Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmer
 Formula: pers ~ group * condition + age_z + (1 | sub)
    Data: data_all
 
-REML criterion at convergence: 289
+REML criterion at convergence: 305.1
 
 Scaled residuals: 
      Min       1Q   Median       3Q      Max 
--2.50227 -0.43088  0.01963  0.39033  2.04629 
+-2.44163 -0.42192  0.01819  0.43159  2.01481 
 
 Random effects:
  Groups   Name        Variance Std.Dev.
- sub      (Intercept) 0.5091   0.7135  
- Residual             0.1384   0.3720  
-Number of obs: 146, groups:  sub, 73
+ sub      (Intercept) 0.6325   0.7953  
+ Residual             0.2013   0.4487  
+Number of obs: 134, groups:  sub, 67
 
 Fixed effects:
-                     Estimate Std. Error       df t value Pr(>|t|)    
-(Intercept)           0.85957    0.14091 84.84382   6.100 3.05e-08 ***
-groupED               0.01018    0.20680 83.50226   0.049    0.961    
-conditionBID         -0.06547    0.08767 71.00000  -0.747    0.458    
-age_z                 0.15376    0.09938 70.00000   1.547    0.126    
-groupED:conditionBID -0.03514    0.12315 71.00000  -0.285    0.776    
+                      Estimate Std. Error        df t value Pr(>|t|)    
+(Intercept)           1.406241   0.169428 79.533128   8.300 2.17e-12 ***
+groupED              -0.192830   0.244106 78.222154  -0.790    0.432    
+conditionBID         -0.002391   0.112163 65.000000  -0.021    0.983    
+age_z                 0.132707   0.116479 64.000000   1.139    0.259    
+groupED:conditionBID -0.034106   0.155186 65.000000  -0.220    0.827    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 Correlation of Fixed Effects:
             (Intr) gropED cndBID age_z 
-groupED     -0.744                     
-conditinBID -0.311  0.212              
-age_z        0.307 -0.413  0.000       
-grpED:cnBID  0.221 -0.298 -0.712  0.000
+groupED     -0.753                     
+conditinBID -0.331  0.230              
+age_z        0.304 -0.404  0.000       
+grpED:cnBID  0.239 -0.318 -0.723  0.000

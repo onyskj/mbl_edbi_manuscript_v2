@@ -8,11 +8,12 @@ library(Rpdb)
 library(lme4)
 library(lmerTest) # for regression functions
 
-shiftMe=FALSE
-recodeMe=FALSE
-load_recoded=TRUE
-saveCSV=FALSE
-file_name_load = "simulated_data_from_fitted_ind_params_df_2021_09_09_02_06_39_ED_NT_niter_4000_foerde_alter_JO_wrong_ship_plus"
+shiftMe=TRUE
+recodeMe=TRUE
+load_recoded=FALSE
+saveCSV=TRUE
+fitModels = TRUE
+file_name_load = "simulated_data_from_fitted_ind_params_df_2021_09_20_21_21_24_ED_NT_niter_4000_foerde_alter_2_JO_wrong_ship_newexc_plus"
 
 # Shift data ---------------------------------
 if(shiftMe){
@@ -33,15 +34,9 @@ if(shiftMe){
   }
   
   data_all_shifted$age_z = rep(0,dim(data_all_shifted)[1])
-  # for (i in unique(data_all_shifted$sub)){
-  #   locator_temp0=which(data_all_shifted$sub==i)
-  #   locator_temp=which(data_all$group==unique(data_all$group[data_all$sub==i])& data_all_shifted$condition=='NT')
-  #   data_all_shifted[locator_temp0,]$age_z = (data_all_shifted[locator_temp0,]$age-mean(data_all_shifted[locator_temp,]$age,na.rm = TRUE))/sd(data_all_shifted[locator_temp,]$age,na.rm=TRUE)
-  # }
   for (i in unique(data_all_shifted$sub)){
     locator_temp0=which(data_all_shifted$sub==i)
     locator_temp=which(data_all_shifted$trialNo==1 & data_all_shifted$condition=='NT')
-    # locator_temp=which(data_all$group==unique(data_all$group[data_all$sub==i])& data_all_shifted$condition=='NT')
     data_all_shifted[locator_temp0,]$age_z = (data_all_shifted[locator_temp0,]$age-mean(data_all_shifted[locator_temp,]$age,na.rm = TRUE))/sd(data_all_shifted[locator_temp,]$age,na.rm=TRUE)
   }
   
@@ -89,92 +84,92 @@ data_all_shifted_recoded$cond_order = relevel(data_all_shifted_recoded$cond_orde
 data_all_shifted_recoded$condition = relevel(data_all_shifted_recoded$condition, ref="NT")
 
 
-save_outputs = TRUE;
-
-# Fit data ---------------------------------
-model1 <- glmer(stay~r*transition*(group+condition)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
-summary(model1)
-if (save_outputs){
-  sink("model_summaries/simulated_data/model1_summary_simulated.txt")
-  print(summary(model1))
-  sink()
+save_outputs = FALSE;
+if (fitModels){
+  # Fit data ---------------------------------
+  model1 <- glmer(stay~r*transition*(group+condition)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
+  summary(model1)
+  if (save_outputs){
+    sink("model_summaries/simulated_data/model1_summary_simulated.txt")
+    print(summary(model1))
+    sink()
+  }
+  
+  model1_2 <- glmer(stay~r*transition*(group+condition+age_z)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
+  summary(model1_2)
+  if (save_outputs){
+    sink("model_summaries/simulated_data/model1_2_summary_simulated.txt")
+    print(summary(model1_2))
+    sink()
+  }
+  # 
+  model2 <- glmer(stay~r*transition*(group*condition)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
+  summary(model2)
+  if (save_outputs){
+    sink("model_summaries/simulated_data/model2_summary_simulated.txt")
+    print(summary(model2))
+    sink()
+  }
+  
+  model2_2 <- glmer(stay~r*transition*(group*condition+age_z)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
+  summary(model2_2)
+  if (save_outputs){
+    sink("model_summaries/simulated_data/model2_2_summary_simulated.txt")
+    print(summary(model2_2))
+    sink()
+  }
+  
+  model3 <- glmer(stay~r*transition*(group)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
+  summary(model3)
+  if (save_outputs){
+    sink("model_summaries/simulated_data/model3_summary_simulated.txt")
+    print(summary(model3))
+    sink()
+  }
+  # 
+  model3_2 <- glmer(stay~r*transition*(group+age_z)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
+  summary(model3_2)
+  if (save_outputs){
+    sink("model_summaries/simulated_data/model3_2_summary_simulated.txt")
+    print(summary(model3_2))
+    sink()
+  }
+  
+  model4 <- glmer(stay~r*transition*(condition)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
+  summary(model4)
+  if (save_outputs){
+    sink("model_summaries/simulated_data/model4_summary_simulated.txt")
+    print(summary(model4))
+    sink()
+  }
+  
+  model4_2 <- glmer(stay~r*transition*(condition+age_z)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
+  summary(model4_2)
+  if (save_outputs){
+    sink("model_summaries/simulated_data/model4_2_summary_simulated.txt")
+    print(summary(model4_2))
+    sink()
+  }
+  
+  model5 <- glmer(stay~r*transition+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
+  summary(model5)
+  if (save_outputs){
+    sink("model_summaries/simulated_data/model5_summary_simulated.txt")
+    print(summary(model5))
+    sink()
+  }
+  
+  model5_2 <- glmer(stay~r*transition*(age_z)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
+  summary(model5_2)
+  if (save_outputs){
+    sink("model_summaries/simulated_data/model5_2_summary_simulated.txt")
+    print(summary(model5_2))
+    sink()
+  }
 }
-
-model1_2 <- glmer(stay~r*transition*(group+condition+age_z)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
-summary(model1_2)
-if (save_outputs){
-  sink("model_summaries/simulated_data/model1_2_summary_simulated.txt")
-  print(summary(model1_2))
-  sink()
-}
-# 
-model2 <- glmer(stay~r*transition*(group*condition)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
-summary(model2)
-if (save_outputs){
-  sink("model_summaries/simulated_data/model2_summary_simulated.txt")
-  print(summary(model2))
-  sink()
-}
-
-model2_2 <- glmer(stay~r*transition*(group*condition+age_z)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
-summary(model2_2)
-if (save_outputs){
-  sink("model_summaries/simulated_data/model2_2_summary_simulated.txt")
-  print(summary(model2_2))
-  sink()
-}
-
-model3 <- glmer(stay~r*transition*(group)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
-summary(model3)
-if (save_outputs){
-  sink("model_summaries/simulated_data/model3_summary_simulated.txt")
-  print(summary(model3))
-  sink()
-}
-# 
-model3_2 <- glmer(stay~r*transition*(group+age_z)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
-summary(model3_2)
-if (save_outputs){
-  sink("model_summaries/simulated_data/model3_2_summary_simulated.txt")
-  print(summary(model3_2))
-  sink()
-}
-
-model4 <- glmer(stay~r*transition*(condition)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
-summary(model4)
-if (save_outputs){
-  sink("model_summaries/simulated_data/model4_summary_simulated.txt")
-  print(summary(model4))
-  sink()
-}
-
-model4_2 <- glmer(stay~r*transition*(condition+age_z)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
-summary(model4_2)
-if (save_outputs){
-  sink("model_summaries/simulated_data/model4_2_summary_simulated.txt")
-  print(summary(model4_2))
-  sink()
-}
-
-model5 <- glmer(stay~r*transition+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
-summary(model5)
-if (save_outputs){
-  sink("model_summaries/simulated_data/model5_summary_simulated.txt")
-  print(summary(model5))
-  sink()
-}
-
-model5_2 <- glmer(stay~r*transition*(age_z)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
-summary(model5_2)
-if (save_outputs){
-  sink("model_summaries/simulated_data/model5_2_summary_simulated.txt")
-  print(summary(model5_2))
-  sink()
-}
-
 
 # MB/MF scores ---------------------------------
-saveCSV_scores=FALSE
+saveCSV_scores=TRUE
 data_all_scores<-NULL
 subs = unique(data_all_shifted_recoded$sub)
 conditions = unique(data_all_shifted_recoded$condition)

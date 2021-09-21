@@ -52,6 +52,7 @@ subject_info = [subject_info(:,1), subject_info(:,16:17), subject_info(:,2:15)];
 qs_scores = [qs_scores(:,1:2), qs_scores(:,11), qs_scores(:,3:10)];
 
 data_all = [all_subjects_nt;all_subjects_tr];
+
 writetable(data_all, 'processed/all_subjects.csv')
 
 % data_all = sortrows(data_all,{'sub','condition','trialNo'},{'ascend','descend','ascend'});

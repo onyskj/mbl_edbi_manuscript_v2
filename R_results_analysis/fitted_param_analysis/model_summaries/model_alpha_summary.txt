@@ -2,31 +2,31 @@ Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmer
 Formula: alpha ~ group * condition + age_z + (1 | sub)
    Data: data_all
 
-REML criterion at convergence: 22.2
+REML criterion at convergence: 26.3
 
 Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--2.4543 -0.4740  0.0584  0.5253  2.1307 
+     Min       1Q   Median       3Q      Max 
+-2.41353 -0.40677  0.01135  0.60174  1.94999 
 
 Random effects:
  Groups   Name        Variance Std.Dev.
- sub      (Intercept) 0.05223  0.2285  
- Residual             0.02746  0.1657  
-Number of obs: 146, groups:  sub, 73
+ sub      (Intercept) 0.03103  0.1762  
+ Residual             0.03859  0.1964  
+Number of obs: 134, groups:  sub, 67
 
 Fixed effects:
-                     Estimate Std. Error       df t value Pr(>|t|)    
-(Intercept)           0.54548    0.04926 95.27069  11.073  < 2e-16 ***
-groupED               0.03014    0.07209 93.07474   0.418  0.67685    
-conditionBID          0.10551    0.03906 71.00000   2.702  0.00862 ** 
-age_z                -0.02298    0.03356 70.00000  -0.685  0.49578    
-groupED:conditionBID -0.11777    0.05486 71.00000  -2.147  0.03523 *  
+                      Estimate Std. Error        df t value Pr(>|t|)    
+(Intercept)            0.61175    0.04855 103.50786  12.599  < 2e-16 ***
+groupED               -0.09216    0.06951 100.71347  -1.326  0.18786    
+conditionBID           0.14824    0.04911  65.00000   3.019  0.00363 ** 
+age_z                  0.01524    0.03052  64.00000   0.500  0.61912    
+groupED:conditionBID  -0.09681    0.06795  65.00000  -1.425  0.15902    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 Correlation of Fixed Effects:
             (Intr) gropED cndBID age_z 
-groupED     -0.742                     
-conditinBID -0.396  0.271              
-age_z        0.296 -0.400  0.000       
-grpED:cnBID  0.282 -0.380 -0.712  0.000
+groupED     -0.748                     
+conditinBID -0.506  0.353              
+age_z        0.278 -0.371  0.000       
+grpED:cnBID  0.366 -0.489 -0.723  0.000

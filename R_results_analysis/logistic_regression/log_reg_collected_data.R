@@ -8,10 +8,10 @@ library(Rpdb)
 library(lme4)
 library(lmerTest) # for regression functions
 
-shiftMe=FALSE
-recodeMe=FALSE
-load_recoded=TRUE
-saveCSV=FALSE
+shiftMe=TRUE
+recodeMe=TRUE
+load_recoded=FALSE
+saveCSV=TRUE
 
 # Shift data ---------------------------------
 if(shiftMe){
@@ -31,15 +31,9 @@ if(shiftMe){
     }
   }
   data_all_shifted$age_z = rep(0,dim(data_all_shifted)[1])
-  # for (i in unique(data_all_shifted$sub)){
-  #   locator_temp0=which(data_all_shifted$sub==i)
-  #   locator_temp=which(data_all$group==unique(data_all$group[data_all$sub==i])& data_all_shifted$condition=='NT')
-  #   data_all_shifted[locator_temp0,]$age_z = (data_all_shifted[locator_temp0,]$age-mean(data_all_shifted[locator_temp,]$age,na.rm = TRUE))/sd(data_all_shifted[locator_temp,]$age,na.rm=TRUE)
-  # }
   for (i in unique(data_all_shifted$sub)){
     locator_temp0=which(data_all_shifted$sub==i)
     locator_temp=which(data_all_shifted$trialNo==1 & data_all_shifted$condition=='NT')
-    # locator_temp=which(data_all$group==unique(data_all$group[data_all$sub==i])& data_all_shifted$condition=='NT')
     data_all_shifted[locator_temp0,]$age_z = (data_all_shifted[locator_temp0,]$age-mean(data_all_shifted[locator_temp,]$age,na.rm = TRUE))/sd(data_all_shifted[locator_temp,]$age,na.rm=TRUE)
   }
   
@@ -170,7 +164,7 @@ if (save_outputs){
 
 
 # MB/MF scores ---------------------------------
-saveCSV_scores = FALSE
+saveCSV_scores = TRUE
 data_all_scores<-NULL
 subs = unique(data_all_shifted_recoded$sub)
 conditions = unique(data_all_shifted_recoded$condition)

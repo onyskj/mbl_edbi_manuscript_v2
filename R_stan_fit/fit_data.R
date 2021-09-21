@@ -35,21 +35,21 @@ list_names = c("ED_NT","ED_BID","HC_NT","HC_BID")
 
 # Set which models and datasets to use ---------------
 test_bool = FALSE;
-model_name = 'foerde_alter_JO.stan';
-model_name_short='foerde_alter_JO_wrong_ship';
+model_name = 'foerde_alter_model.stan';
+model_name_short='foerde_alter_model';
 
 if (test_bool){
   model_name_short=paste(model_name_short,'test',sep='_')
 }
 model_par_names=c("beta_1_MB","beta_1_MF","beta_2","alpha", "pers")
-with_w=c('foerde_alter_JO.stan')
+with_w=c('foerde_alter_model.stan')
 
 if (model_name %in% with_w){
   model_par_names_full=c(model_par_names,"w")
 }
-# sets = 1:length(data_list);
+
 sets = 1:4
-# sets = 3
+# sets = 4
 save_outputs = TRUE;
 
 # Prepare data for stan ---------------
@@ -102,7 +102,7 @@ for (i in sets){
 
 # Fit the data----
 iters = 4000;
-# iters = 10;
+iters = 10;
 
 HBA_fits = list();
 

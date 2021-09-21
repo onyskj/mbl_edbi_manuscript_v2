@@ -1,0 +1,17 @@
+1,cond_incomplete
+4,cond_incomplete
+5,male_wrongship
+8,missed_trials
+9,cond_incomplete
+16,same_choice
+21,male_wrongship
+34,male_wrongship
+45,cond_incomplete
+48,same_choice
+54,same_choice
+58,male_wrongship
+63,male_wrongship
+84,same_choice
+38,rew_cutoff
+15,rt_cutoff
+23,rt_cutoff
