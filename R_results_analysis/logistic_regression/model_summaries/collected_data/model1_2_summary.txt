@@ -1,0 +1,41 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: stay ~ r * transition * (group + condition + age_z) + (r * transition +      1 | sub)
+   Data: data_all_shifted_recoded
+Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e+05))
+
+     AIC      BIC   logLik deviance df.resid 
+ 16722.0  16927.4  -8335.0  16670.0    19952 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-7.0553  0.1808  0.3066  0.4992  4.4061 
+
+Random effects:
+ Groups Name           Variance Std.Dev. Corr             
+ sub    (Intercept)    1.3821   1.1756                    
+        r1             2.2117   1.4872   -0.51            
+        transition1    0.2517   0.5017   -0.75  0.72      
+        r1:transition1 2.2642   1.5047    0.49 -0.85 -0.90
+Number of obs: 19978, groups:  sub, 67
+
+Fixed effects:
+                              Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                  1.6940672  0.2399197   7.061 1.65e-12 ***
+r1                           0.8625727  0.3239154   2.663  0.00775 ** 
+transition1                 -0.6007704  0.1440904  -4.169 3.05e-05 ***
+groupED                     -0.4981134  0.3363995  -1.481  0.13868    
+conditionBID                -0.2422945  0.0920357  -2.633  0.00847 ** 
+age_z                        0.1815090  0.1704229   1.065  0.28685    
+r1:transition1               0.9318960  0.3421957   2.723  0.00646 ** 
+r1:groupED                  -0.0770031  0.4446081  -0.173  0.86250    
+r1:conditionBID              0.0894654  0.1475458   0.606  0.54428    
+r1:age_z                    -0.0475313  0.2235332  -0.213  0.83161    
+transition1:groupED          0.3203776  0.1841788   1.739  0.08195 .  
+transition1:conditionBID     0.1469612  0.1089052   1.349  0.17720    
+transition1:age_z           -0.0536979  0.0949410  -0.566  0.57167    
+r1:transition1:groupED      -0.5855579  0.4642860  -1.261  0.20724    
+r1:transition1:conditionBID -0.1132211  0.1778387  -0.637  0.52435    
+r1:transition1:age_z        -0.0001084  0.2337595   0.000  0.99963    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1

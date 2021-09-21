@@ -1,0 +1,43 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: stay ~ r * transition * (group) + (r * transition + 1 | sub)
+   Data: data_all_shifted_recoded
+Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e+05))
+
+     AIC      BIC   logLik deviance df.resid 
+ 16720.8  16863.1  -8342.4  16684.8    19960 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-6.8875  0.1777  0.3050  0.4974  4.3739 
+
+Random effects:
+ Groups Name           Variance Std.Dev. Corr             
+ sub    (Intercept)    1.4069   1.1861                    
+        r1             2.2007   1.4835   -0.51            
+        transition1    0.2557   0.5057   -0.75  0.72      
+        r1:transition1 2.2578   1.5026    0.48 -0.85 -0.90
+Number of obs: 19978, groups:  sub, 67
+
+Fixed effects:
+                       Estimate Std. Error z value Pr(>|z|)    
+(Intercept)              1.4848     0.2226   6.669 2.58e-11 ***
+r1                       0.9331     0.2953   3.159  0.00158 ** 
+transition1             -0.4994     0.1238  -4.034 5.48e-05 ***
+groupED                 -0.3401     0.3063  -1.111  0.26678    
+r1:transition1           0.8751     0.3089   2.833  0.00462 ** 
+r1:groupED              -0.1210     0.4007  -0.302  0.76266    
+transition1:groupED      0.2730     0.1674   1.630  0.10303    
+r1:transition1:groupED  -0.5873     0.4182  -1.405  0.16016    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) r1     trnst1 gropED r1:tr1 r1:gED tr1:ED
+r1          -0.511                                          
+transition1 -0.710  0.609                                   
+groupED     -0.723  0.368  0.508                            
+r1:transtn1  0.469 -0.845 -0.747 -0.337                     
+r1:groupED   0.373 -0.729 -0.443 -0.516  0.615              
+trnstn1:gED  0.516 -0.442 -0.722 -0.707  0.544  0.619       
+r1:trns1:ED -0.343  0.616  0.545  0.475 -0.730 -0.843 -0.766

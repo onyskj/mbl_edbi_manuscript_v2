@@ -1,0 +1,51 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: stay ~ r * transition * (group + age_z) + (r * transition + 1 |      sub)
+   Data: data_all_shifted_recoded
+Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e+05))
+
+     AIC      BIC   logLik deviance df.resid 
+ 16727.3  16901.2  -8341.7  16683.3    19956 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-6.8620  0.1778  0.3056  0.4966  4.3108 
+
+Random effects:
+ Groups Name           Variance Std.Dev. Corr             
+ sub    (Intercept)    1.3726   1.1716                    
+        r1             2.2054   1.4851   -0.51            
+        transition1    0.2526   0.5026   -0.74  0.72      
+        r1:transition1 2.2645   1.5048    0.49 -0.85 -0.90
+Number of obs: 19978, groups:  sub, 67
+
+Fixed effects:
+                        Estimate Std. Error z value Pr(>|z|)    
+(Intercept)             1.566050   0.233083   6.719 1.83e-11 ***
+r1                      0.913640   0.312776   2.921  0.00349 ** 
+transition1            -0.522916   0.131215  -3.985 6.74e-05 ***
+groupED                -0.491233   0.334191  -1.470  0.14158    
+age_z                   0.181462   0.169828   1.069  0.28529    
+r1:transition1          0.871224   0.327740   2.658  0.00785 ** 
+r1:groupED             -0.083725   0.442691  -0.189  0.84999    
+r1:age_z               -0.049683   0.223250  -0.223  0.82389    
+transition1:groupED     0.315291   0.183737   1.716  0.08616 .  
+transition1:age_z      -0.052905   0.095017  -0.557  0.57767    
+r1:transition1:groupED -0.582842   0.462504  -1.260  0.20760    
+r1:transition1:age_z    0.001463   0.233805   0.006  0.99501    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) r1     trnst1 gropED age_z  r1:tr1 r1:gED r1:g_z tr1:ED trn1:_ r1:1:E
+r1          -0.511                                                                      
+transition1 -0.707  0.606                                                               
+groupED     -0.757  0.385  0.529                                                        
+age_z        0.331 -0.171 -0.238 -0.425                                                 
+r1:transtn1  0.471 -0.844 -0.746 -0.354  0.156                                          
+r1:groupED   0.390 -0.763 -0.460 -0.514  0.218  0.643                                   
+r1:age_z    -0.174  0.337  0.208  0.220 -0.524 -0.284 -0.429                            
+trnstn1:gED  0.541 -0.463 -0.759 -0.703  0.300  0.572  0.616 -0.263                     
+trnstn1:g_z -0.239  0.203  0.344  0.294 -0.706 -0.250 -0.256  0.620 -0.420              
+r1:trns1:ED -0.360  0.644  0.569  0.475 -0.201 -0.764 -0.842  0.361 -0.765  0.317       
+r1:trnst1:_  0.160 -0.284 -0.255 -0.202  0.484  0.338  0.360 -0.841  0.326 -0.768 -0.428
