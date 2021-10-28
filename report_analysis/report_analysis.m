@@ -261,9 +261,9 @@ for i=1:length(scores_for_corr)
     [lb_eps, ub_eps] = bounds(dfs.delta_w);
     [r,p]=corrcoef([dfs.delta_w,scores_for_corr{i}],'rows','complete');
     if p(1,2)<0.001
-        scatter(ax,dfs.delta_w,scores_for_corr{i},mSize,'filled','DisplayName',['PCC = ',num2str(round(r(1,2),3)),10,'p-value = ',num2str(round(p(1,2),12),'%10.2e\n')]);
+        scatter(ax,dfs.delta_w,scores_for_corr{i},mSize,'filled','DisplayName',['\rho = ',num2str(round(r(1,2),3)),10,'p-value = ',num2str(round(p(1,2),12),'%10.2e\n')]);
     else
-        scatter(ax,dfs.delta_w,scores_for_corr{i},mSize,'filled','DisplayName',['PCC = ',num2str(round(r(1,2),3)),10,'p-value = ',num2str(round(p(1,2),3))]);
+        scatter(ax,dfs.delta_w,scores_for_corr{i},mSize,'filled','DisplayName',['\rho = ',num2str(round(r(1,2),3)),10,'p-value = ',num2str(round(p(1,2),3))]);
     end
     hold on;
     h=lsline(ax);
@@ -287,7 +287,6 @@ set(gcf,'units','normalized','outerposition',[0 0 1 1])
 fname_df = 'figures/corr_info_delta_w';
 % export_fig(fname_df,'-pdf', '-m1', '-transparent')
 % saveas(gca,fname_df,'epsc')
-
 
 %% Plot stay probabilities - collected data
 data_all_scores.group =  categorical(data_all_scores.group);

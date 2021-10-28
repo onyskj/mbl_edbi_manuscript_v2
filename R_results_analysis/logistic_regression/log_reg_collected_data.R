@@ -81,6 +81,11 @@ data_all_shifted_recoded$group = relevel(data_all_shifted_recoded$group, ref="HC
 data_all_shifted_recoded$cond_order = relevel(data_all_shifted_recoded$cond_order, ref="NTfirst")
 data_all_shifted_recoded$condition = relevel(data_all_shifted_recoded$condition, ref="NT")
 
+# data_all_shifted_recoded$group = relevel(data_all_shifted_recoded$group, ref="ED")
+# data_all_shifted_recoded$cond_order = relevel(data_all_shifted_recoded$cond_order, ref="NTfirst")
+# data_all_shifted_recoded$condition = relevel(data_all_shifted_recoded$condition, ref="BID")
+
+
 # Fit data ---------------------------------
 model1 <- glmer(stay~r*transition*(group+condition)+(r*transition+1|sub), family = binomial, data=data_all_shifted_recoded,control = glmerControl(optimizer = "bobyqa",optCtrl = list(maxfun=1e5)))
 summary(model1)
