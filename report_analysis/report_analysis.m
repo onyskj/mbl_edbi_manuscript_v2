@@ -10,8 +10,8 @@ results_tr_hc = readtable("fitted_data/fitted_ind_params_df_2021_09_21_02_17_29_
 data_all_scores = readtable("fitted_data/data_all_scores.csv");
 data_all_scores_simulated = readtable("simulated_data/data_all_scores_simulated.csv");
 
-delta_w_ed = array2table(results_tr_ed{:,6} - results_nt_ed{:,6},'VariableNames',{'delta_w'}); 
-delta_w_hc = array2table(results_tr_hc{:,6} - results_nt_hc{:,6},'VariableNames',{'delta_w'}); 
+delta_bmb_ed = array2table(results_tr_ed{:,1} - results_nt_ed{:,1},'VariableNames',{'delta_bmb'}); 
+delta_bmb_hc = array2table(results_tr_hc{:,1} - results_nt_hc{:,1},'VariableNames',{'delta_bmb'}); 
 
 qs_scores = readtable("data/qs_scores.csv");
 qs_scores.bmi=qs_scores.weight./(qs_scores.height/100).^2;
@@ -132,7 +132,7 @@ writetable(subject_info_summary_task{2},'tables/subject_info_summary_task_ed.csv
 close all
 % MB
 axisFontSize=30;
-subplot(1,3,1)
+subplot(1,2,1)
 y=[results_info{3}(1,1), results_info{1}(1,1);results_info{4}(1,1),results_info{2}(1,1)];
 errors = [results_info{3}(1,3), results_info{1}(1,3);results_info{4}(1,3),results_info{2}(1,3)];
 
@@ -159,13 +159,13 @@ legend('HC','ED','location','north')
 yticks(linspace(0, 2,5))
 ylim([0 max(y,[],'all')+max(errors,[],'all')*6/3])
 axis square
-text(-0.2,1.15,charlbl{1},'Units','normalized','FontSize',axisFontSize,'FontWeight','bold')
+text(-0.2,1.05,charlbl{1},'Units','normalized','FontSize',axisFontSize,'FontWeight','bold')
 set(gca,'fontsize',axisFontSize,'Box','off','TickDir','out','TickLength'...
         ,[.0175 .0175],'XMinorTick'  , 'off','YMinorTick','on','YGrid','off',...
         'XColor',[.3 .3 .3],'YColor',[.3 .3 .3],'LineWidth',2,'FontName','Helvetica','XDir', 'default');
 %
 % MF
-subplot(1,3,2)
+subplot(1,2,2)
 y=[results_info{3}(2,1), results_info{1}(2,1);results_info{4}(2,1),results_info{2}(2,1)];
 errors = [results_info{3}(2,3), results_info{1}(2,3);results_info{4}(2,3),results_info{2}(2,3)];
 
@@ -192,56 +192,23 @@ xticklabels({'Neutral','BID'})
 yticks(linspace(0, 1.8,5))
 ylim([0 max(y,[],'all')+max(errors,[],'all')*4/3])
 axis square
-text(-0.2,1.15,charlbl{2},'Units','normalized','FontSize',axisFontSize,'FontWeight','bold')
+text(-0.2,1.05,charlbl{2},'Units','normalized','FontSize',axisFontSize,'FontWeight','bold')
 set(gca,'fontsize',axisFontSize,'Box','off','TickDir','out','TickLength'...
         ,[.0175 .0175],'XMinorTick'  , 'off','YMinorTick','on','YGrid','off',...
         'XColor',[.3 .3 .3],'YColor',[.3 .3 .3],'LineWidth',2,'FontName','Helvetica','XDir', 'default');
 
-%w
-subplot(1,3,3)
-y=[results_info{3}(6,1), results_info{1}(6,1);results_info{4}(6,1),results_info{2}(6,1)];
-errors = [results_info{3}(6,3), results_info{1}(6,3);results_info{4}(6,3),results_info{2}(6,3)];
-
-bar(y,'grouped')
-hold on
-title('Relative MB learning: w')
-ylabel('w')
-ngroups = size(y,1);
-nbars = size(y,2);
-groupwidth = min(0.8, nbars/(nbars + 1.5));
-for i = 1:nbars
-    hold on;
-    xx = (1:ngroups) - groupwidth/2 + (2*i-1) * groupwidth / (2*nbars);
-    errorbar(xx(1)', y(1,i), errors(1,i), 'k', 'linestyle', 'none','linewidth',4);
-    hold on;
-    plot(xx(1)', y(1,i),'s','markersize',7,'color','k','MarkerFaceColor','k')
-    hold on;
-    errorbar(xx(2)', y(2,i), errors(2,i), 'k', 'linestyle', 'none','linewidth',4);
-    hold on;
-    plot(xx(2)', y(2,i),'s','markersize',7,'color','k','MarkerFaceColor','k')
-end
-xticklabels({'Neutral','BID'})
-% legend('HC','ED')
-yticks(linspace(0, 0.6,5))
-ylim([0 max(y,[],'all')+max(errors,[],'all')*5/3])
-axis square
-text(-0.35,1.15,charlbl{3},'Units','normalized','FontSize',axisFontSize,'FontWeight','bold')
-set(gca,'fontsize',axisFontSize,'Box','off','TickDir','out','TickLength'...
-        ,[.0175 .0175],'XMinorTick'  , 'off','YMinorTick','on','YGrid','off',...
-        'XColor',[.3 .3 .3],'YColor',[.3 .3 .3],'LineWidth',2,'FontName','Helvetica','XDir', 'default');
-    
-sgtitle('Average parameter values in HC and ED at the neutral and BID condition','fontsize',40)
+sgtitle('Average parameter values in HC and ED at the neutral and BID condition','fontsize',35)
 
 set(gcf,'units','normalized','outerposition',[0 0 1 1])
 fname = 'figures/params_ED_HC_NT_TR';
 % export_fig(fname,'-pdf', '-m1', '-transparent')
 % 
 
-%% All together corrleations with delta w
+%% All together corrleations with delta MB
 clc
 close all
 scores=[qs_scores_groups{1};qs_scores_groups{2}];
-dfs = [delta_w_hc;delta_w_ed];
+dfs = [delta_bmb_hc;delta_bmb_ed];
 param_names_corr= {'beta_1_MB','beta_1_MF','w'};
 group_cond_list = {'ED_NT','ED_BID','HC_NT','HC_BID'};
 
@@ -258,12 +225,12 @@ names = {'EAT-26 score','AAI score', 'OCI-R score','Age'};
 
 for i=1:length(scores_for_corr)
     ax=subplot(1,4,i);    
-    [lb_eps, ub_eps] = bounds(dfs.delta_w);
-    [r,p]=corrcoef([dfs.delta_w,scores_for_corr{i}],'rows','complete');
+    [lb_eps, ub_eps] = bounds(dfs.delta_bmb);
+    [r,p]=corrcoef([dfs.delta_bmb,scores_for_corr{i}],'rows','complete');
     if p(1,2)<0.001
-        scatter(ax,dfs.delta_w,scores_for_corr{i},mSize,'filled','DisplayName',['\rho = ',num2str(round(r(1,2),3)),10,'p-value = ',num2str(round(p(1,2),12),'%10.2e\n')]);
+        scatter(ax,dfs.delta_bmb,scores_for_corr{i},mSize,'filled','DisplayName',['r = ',num2str(round(r(1,2),3)),10,'p-value = ',num2str(round(p(1,2),12),'%10.2e\n')]);
     else
-        scatter(ax,dfs.delta_w,scores_for_corr{i},mSize,'filled','DisplayName',['\rho = ',num2str(round(r(1,2),3)),10,'p-value = ',num2str(round(p(1,2),3))]);
+        scatter(ax,dfs.delta_bmb,scores_for_corr{i},mSize,'filled','DisplayName',['r = ',num2str(round(r(1,2),3)),10,'p-value = ',num2str(round(p(1,2),3))]);
     end
     hold on;
     h=lsline(ax);
@@ -272,21 +239,21 @@ for i=1:length(scores_for_corr)
     h.HandleVisibility='off';
     legend('location','best');
     ylabel(names{i});
-    xlabel('\Deltaw');
-    ylim([lower_y_lim(scores_for_corr{i}),max(scores_for_corr{i})*1.5+1])
+    xlabel('\Delta\beta_{MB}');
+    ylim([lower_y_lim(scores_for_corr{i}),max(scores_for_corr{i})*1.3])
     axis square
-    text(-0.3,1.15,charlbl{i},'Units','normalized','FontSize',axisFontSize,'FontWeight','bold')
+    text(-0.25,1.175,charlbl{i},'Units','normalized','FontSize',axisFontSize,'FontWeight','bold')
 %     axis tight
     set(gca,'fontsize',axisFontSize,'Box','off','TickDir','out','TickLength'...
         ,[.0175 .0175],'XMinorTick'  , 'on','YMinorTick','on','YGrid','off',...
         'XColor',[.3 .3 .3],'YColor',[.3 .3 .3],'LineWidth',2,'FontName','Helvetica','XDir', 'default');
     
 end
-sgtitle('Correlations of demographic and questionnaire information with \Deltaw','fontsize',38)
+sgtitle('Correlations of demographic and questionnaire information with \Delta\beta_{MB}','fontsize',38)
 set(gcf,'units','normalized','outerposition',[0 0 1 1])
-fname_df = 'figures/corr_info_delta_w';
+fname_df = 'figures/corr_info_delta_bmb';
 % export_fig(fname_df,'-pdf', '-m1', '-transparent')
-% saveas(gca,fname_df,'epsc')
+saveas(gca,fname_df,'epsc')
 
 %% Plot stay probabilities - collected data
 data_all_scores.group =  categorical(data_all_scores.group);
@@ -581,3 +548,20 @@ set(gcf,'units','normalized','outerposition',[0 0 1 1]);
 fname_df = 'figures/mb_scores_colleceted_simulated_plots';
 % export_fig(fname_df,'-pdf', '-m1', '-transparent')
 % saveas(gca,fname_df,'epsc')
+
+%% Correlation between scores
+a1=qs_scores(ismember(qs_scores.group,'HC'),:).EAT_26_z;
+a2=qs_scores(ismember(qs_scores.group,'HC'),:).AAI_z;
+a3=qs_scores(ismember(qs_scores.group,'HC'),:).OCI_R_z;
+
+b1=qs_scores(ismember(qs_scores.group,'ED'),:).EAT_26_z;
+b2=qs_scores(ismember(qs_scores.group,'ED'),:).AAI_z;
+b3=qs_scores(ismember(qs_scores.group,'ED'),:).OCI_R_z;
+
+a1=qs_scores.EAT_26_z;
+a2=qs_scores.AAI_z;
+a3=qs_scores.OCI_R_z;
+
+[r12,p12]=corrcoef([a1,a2],'rows','complete');
+[r13,p13]=corrcoef([a1,a3],'rows','complete');
+[r23,p23]=corrcoef([a2,a3],'rows','complete');
